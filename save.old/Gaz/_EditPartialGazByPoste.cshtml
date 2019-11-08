@@ -1,0 +1,66 @@
+﻿@model SpanGazV2.Models.tbl_607_gaz
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+    <h2 style="margin-left: 15px; color:#ffbe2e">Edit gaz</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>tbl_607_gaz</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FK_ID_theorical_content, "FK_ID_theorical_content", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FK_ID_theorical_content", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FK_ID_theorical_content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FK_ID_made_tolerence, "FK_ID_made_tolerence", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FK_ID_made_tolerence", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FK_ID_made_tolerence, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FK_ID_gaz_type, "FK_ID_gaz_type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FK_ID_gaz_type", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FK_ID_gaz_type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FK_ID_testing_tolerence, "FK_ID_testing_tolerence", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FK_ID_testing_tolerence", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FK_ID_testing_tolerence, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

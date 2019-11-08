@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc4d7e0dc0a1492ea43fdb6641e63970" Name="Diagram1">
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_actors" Width="1.5" PointX="1.5" PointY="44.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_bottle" Width="1.5" PointX="3" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_comments" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_conformity_certificate" Width="1.5" PointX="0.75" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_gaz" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_gaz_reporting" Width="1.5" PointX="5.25" PointY="39.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_gaz_type" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_join_bottle_gaz" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_location" Width="1.5" PointX="0.75" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_made_tolerance" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_order" Width="1.5" PointX="1.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_order_details" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_packaging" Width="1.5" PointX="1.5" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_provider" Width="1.5" PointX="1.5" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_real_gaz_content" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_shipping_delivery" Width="1.5" PointX="0.75" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_shipping_details" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_shipping_request" Width="1.5" PointX="1.5" PointY="40.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_shipping_request_details" Width="1.5" PointX="3.75" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_testing_tolerance" Width="1.5" PointX="0.75" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_theorical_content" Width="1.5" PointX="0.75" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_tc2Model.tbl_607_units" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_reporting_tbl_607_actors1" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_shipping_request_tbl_607_actors1" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_bottle_tbl_607_conformity_certificate" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_bottle_tbl_607_location" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_bottle_tbl_607_order" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_bottle_tbl_607_shipping_delivery" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_reporting_tbl_607_bottle" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_join_bottle_gaz_tbl_607_bottle1" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_tbl_607_gaz_type" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_tbl_607_made_tolerance" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_tbl_607_MadeToleranceUnits" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_tbl_607_order_details" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_tbl_607_testing_tolerance" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_tbl_607_TestingToleranceUnits" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_tbl_607_theorical_content" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_gaz_tbl_607_TheoricalContentUnits" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_join_bottle_gaz_tbl_607_gaz1" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_join_bottle_gaz_tbl_607_real_gaz_content" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_order_details_tbl_607_order" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_order_tbl_607_provider1" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_shipping_request_tbl_607_order" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_order_details_tbl_607_packaging" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_shipping_request_details_tbl_607_order_details" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_shipping_delivery_tbl_607_shipping_request" ManuallyRouted="false" />
+        <AssociationConnector Association="database_tc2Model.FK_tbl_607_shipping_request_details_tbl_607_shipping_request" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

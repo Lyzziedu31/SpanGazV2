@@ -1,0 +1,80 @@
+﻿@model SpanGazV2.Models.tbl_607_bottle
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <h2 style="color:#ffbe2e">Bottle details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <a style="color:#ffbe2e">Manufacturer bottle number</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.manufacturer_bottle_number)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Conti bottle number</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.bottle_conti_number)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Order number</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_order.order_number)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Conformity certificate</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_conformity_certificate.ID)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Bottle location</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_location.bottle_location)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Delivery ref</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_shipping_delivery.ID)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Reception date</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_shipping_delivery.reception_date)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Expiration date</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_conformity_certificate.expiration_date)
+        </dd>
+    </dl>
+</div>
+<p>
+    <button type="button" class="btn btn-danger" style="margin-left: 5px">@Html.ActionLink("Back to List", "Index")</button>
+</p>

@@ -1,0 +1,49 @@
+﻿@model SpanGazV2.Models.tbl_607_shipping_request
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <h2 style="color:#ffbe2e">Order details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <a style="color:#ffbe2e">Contract</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_order.order_number)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Order Ref</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.shipping_request_ref)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Request date</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.request_date)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">First name</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_actors.first_name)
+        </dd>
+    </dl>
+</div>
+<p>
+    <button type="button" class="btn btn-warning" style="margin-right: 5px">@Html.ActionLink("Edit", "Edit", new { id = Model.ID })</button> |
+    <button type="button" class="btn btn-danger" style="margin-left: 5px">@Html.ActionLink("Back to List", "Index")</button>
+</p>

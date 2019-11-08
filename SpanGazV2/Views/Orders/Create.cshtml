@@ -1,0 +1,54 @@
+﻿@model SpanGazV2.Models.tbl_607_shipping_request
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h2 style="color:#ffbe2e">Create order</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <a style="color:#ffbe2e">@Html.LabelFor(model => model.request_date, "Request Date", htmlAttributes: new { @class = "control-label col-md-2" })</a>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.request_date)
+                @Html.ValidationMessageFor(model => model.request_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a style="color:#ffbe2e; margin-left:15px">Contract number</a>
+                <div class="col-md-3" style="margin-top:10px">
+                    @Html.DropDownList("FK_order", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FK_order, "", new { @class = "text-danger" })
+                </div>
+        </div>
+
+        <div class="form-group">
+            <a style="color:#ffbe2e">@Html.LabelFor(model => model.tbl_607_actors.first_name, "Actor", htmlAttributes: new { @class = "control-label col-md-2" })</a>
+                <div class="col-md-3">
+                    @Html.DropDownList("FK_ID_actors", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.tbl_607_actors.first_name, "", new { @class = "text-danger" })
+                </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" value="Create" class="btn btn-success">Create</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div style="margin-left:15px">
+    <button class="btn btn-danger"> @Html.ActionLink("Back to List", "Index") </button>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,62 @@
+﻿@model PagedList.IPagedList<SpanGazV2.Models.tbl_607_shipping_delivery>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="color:#ffbe2e">Deliveries administration</h2>
+
+@using (Html.BeginForm())
+{
+    <p style="color:#ffbe2e">
+        Find: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped table-sm">
+        <tr>
+            <th scope="col">
+                @Html.ActionLink("BL ref", "Index", new { sortOrder = ViewBag.BL_refSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                @Html.ActionLink("Reception Date", "Index", new { sortOrder = ViewBag.Reception_dateSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                Request Date
+            </th>
+            <th scope="col">
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.BL_ref)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.reception_date)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_shipping_request.request_date)
+                </td>
+                <td scope="col">
+                    <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Edit", new { id = item.ID })'">Edit</button> |
+                    <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Details", new { id = item.ID })'">Details</button> |
+                    <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.ID })'">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div style="color:#ffbe2e">
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

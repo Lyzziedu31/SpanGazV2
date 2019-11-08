@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Ooops";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>SpanGaz_V2</title>
+    <!-- Google font -->
+    <link href="@Url.Content("https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600")" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap-grid.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap-reboot.css")" rel="stylesheet" type="text/css" />
+    <!-- Custom stlylesheet -->
+    <link href="@Url.Content("~/Content/login.css")" rel="stylesheet" type="text/css" />
+
+</head>
+<body class="container-fluid">
+
+    <div class="col-md-12 d-flex justify-content-center align-items-center">
+        <img class="col-md-4" style="width: 400px; height: 400px;" src="~/Content/ressources/bad-luck.gif" />
+    </div>
+    <div class="col-md-12 d-flex justify-content-center align-items-center alert alert-danger" role="alert">
+        @ViewBag.message
+    </div>
+
+</body>

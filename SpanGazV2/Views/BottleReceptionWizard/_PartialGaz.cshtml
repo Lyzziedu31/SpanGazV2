@@ -1,0 +1,175 @@
+﻿@model IEnumerable<SpanGazV2.Models.tbl_607_gaz>
+
+<a id="idcontract" style="visibility:hidden">@ViewBag.IDContract</a>
+<a id="idposte" style="visibility:hidden">@ViewBag.IDPoste</a>
+<a id="contractnumber" style="visibility:hidden">@ViewBag.ContractNumber</a>
+<a id="provider" style="visibility:hidden">@ViewBag.Provider</a>
+<a id="poste" style="visibility:hidden">@ViewBag.Poste</a>
+<a id="fabdate" style="visibility:hidden">@ViewBag.Fabdate</a>
+<a id="expdate" style="visibility:hidden">@ViewBag.Expdate</a>
+<a id="blref" style="visibility:hidden">@ViewBag.BLref</a>
+<a id="BLDate" style="visibility:hidden">@ViewBag.BLDate</a>
+<a id="Certif" style="visibility:hidden">@ViewBag.Certif</a>
+<a id="Content" style="visibility:hidden">@ViewBag.Content</a>
+<a id="idShippingRequest" style="visibility:hidden">@ViewBag.idShippingRequest</a>
+<a id="mailsender" style="visibility:hidden">@ViewBag.mailsender</a>
+
+<div id="partialdata">
+    <div class="row">
+        <div class="col-2">
+            <a style="color:#ffbe2e">Manufacturer bottle label:</a>
+        </div>
+        <div class="col-3">
+            <input type="number" class="form-control" id="manufacturerlabel" style="margin-left:15px" />
+        </div>
+
+        <div class="col-2">
+            <a style="color:#ffbe2e">Label assignment:</a>
+        </div>
+        <div class="col-3">
+            <input type="number" class="form-control" id="contilabel" style="margin-left:15px" />
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive" id="gaztable" style="margin-top:20px">
+    <table class="table table-dark table-striped">
+        <tr>
+            <th scope="col">
+                Gaz type
+            </th>
+            <th scope="col">
+                Theorical content
+            </th>
+            <th scope="col">
+                Unit
+            </th>
+            <th scope="col">
+                Made tolerance
+            </th>
+            <th scope="col">
+                certificate value
+            </th>
+            <th scope="col">
+                validation
+            </th>
+        </tr>
+
+        @{
+            int cpt = 0;
+
+            foreach (var item in Model)
+            {
+                cpt++;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbl_607_gaz_type.gaz_type)
+                    </td>
+                    <td id="normalvalue_@cpt">
+                        @Html.DisplayFor(modelItem => item.tbl_607_theorical_content.theorical_content)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbl_607_units2.unit)
+                    </td>
+                    <td id="tol_@cpt">
+                        @Html.DisplayFor(modelItem => item.tbl_607_made_tolerance.made_tolerance)
+                    </td>
+                    <td>
+                        <input class="form-control" id="certifvalue_@cpt" type="number" placeholder="Enter value" />
+                    </td>
+                    <td>
+                        <button class="btn btn-warning" id="controlbtn_@cpt" onclick="ControlGaz(cpt = @cpt, idgaz = @item.ID)">Control</button>
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+
+<div id="labeldisplay" style="margin-top:20px; align-content:flex-end; visibility:hidden">
+    <div class="col-2">
+        <button class="btn btn-success" onclick="Recapdata()">Valid</button>
+    </div>
+</div>
+
+<div class="col-6" id="savebutton" style="margin-right:20px; visibility:hidden">
+    <button class="btn btn-success" onclick="SaveData()">Save</button>
+</div>
+<div class="row" id="mailbutton" style="margin-right:20px; margin-top:-50px; visibility:hidden">
+    <div class="col-2">
+        <button style="margin-left:20px" class="btn btn-primary" onclick="window.location.href ='mailto:mailto@xxx.com&cc=@ViewBag.mailsender&subject=SpanGazV2 reception advice&body=---Mail généré automatiquement par SpanGazV2--- %0A    Nouvelle(s) Bouteille Mise en Stock %0APoste N° @ViewBag.Poste %0ABouteille étalon %0AQuantité: 1     %0AFournisseur: @ViewBag.Provider %0ACommande: @ViewBag.ContractNumber %0ABL_ref: @ViewBag.BLref %0AContenu: @ViewBag.Content'">Send EMail</button>
+    </div>
+    <div class=" col-1 alert alert-success" style="margin-top:-5px; margin-left:-30px" role="alert">
+        Success!!!
+    </div>
+</div>
+
+<script>
+    function Recapdata() {
+
+        var idShippingRequest = @ViewBag.idShippingRequest;
+            console.log("idShippingRequest: ")
+            console.log(idShippingRequest);
+
+        var ManNumber = document.getElementById("manufacturerlabel").value;
+        console.log("ManNumber:");
+        console.log(ManNumber);
+
+        var ContiNumber = document.getElementById("contilabel").value;
+        console.log("ContiNumber:");
+        console.log(ContiNumber);
+
+        var idposte = @ViewBag.IDPoste;
+        console.log("idposte:");
+        console.log(idposte);
+
+        var idcontract = @ViewBag.IDContract;
+        console.log("contract:");
+        console.log(idcontract);
+
+        var contractnumber = @ViewBag.ContractNumber;
+        console.log("contractnumber:");
+        console.log(contractnumber);
+
+        var provider = '"@ViewBag.Provider"';
+        console.log("provider:");
+        console.log(provider);
+
+        var Blref = @ViewBag.BLref;
+        console.log("Blref:");
+        console.log(Blref);
+
+        var BLDate = @ViewBag.BLDate;
+        console.log("BLDate:");
+        console.log(BLDate);
+
+        var Certif = @ViewBag.Certif;
+        console.log("Certif:");
+        console.log(Certif);
+
+        var fabdate = @ViewBag.Fabdate;
+        console.log("fabdate:");
+        console.log(fabdate);
+
+        var expdate = @ViewBag.Expdate;
+        console.log("expdate:");
+        console.log(expdate);
+
+         $.ajax({
+                url: '@Url.Action("Recapdata")',
+             dataType: "html",
+             data: { "ManNumber":ManNumber, "idShippingRequest":idShippingRequest, "ContiNumber": ContiNumber,"contractnumber":contractnumber,"provider":provider, "idcontract":idcontract, "idposte":idposte, "poste":poste, "Blref":Blref, "BLDate":BLDate, "Certif":Certif, "fabdate":fabdate, "expdate":expdate},
+                type: "POST",
+                //contentType: "application/json",
+             success: function (response) {
+                 $('#partialdata').html(response);
+                 $("#labeldisplay").css('visibility', 'hidden');
+                 $("#savebutton").css('visibility', 'visible');
+             },
+             error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+    }
+</script>

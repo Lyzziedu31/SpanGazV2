@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SpanGaz_V2</title>
+    <link href="@Url.Content("~/Content/navbar.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="~/Scripts/datevalidation.js" rel="javascript" type="text/javascript" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <!--local fontawesome -->
+    <link href="@Url.Content("~/Content/awesome/css/all.css")" rel="stylesheet" type="text/css" />
+    <script defer src="~/Content/awesome/js/all.js"></script> <!--load all styles -->
+    <link href="~/Content/awesome/css/fontawesome.css" rel="stylesheet">
+    <link href="~/Content/awesome/css/brands.css" rel="stylesheet">
+    <link href="~/Content/awesome/css/solid.css" rel="stylesheet">
+</head>
+<body class="bg-dark overflow-auto">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand navbar-font" style="color:#ffbe2e" asp-area="" asp-page="/Index">SpanGaz_V2_Web</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-dark btn-outline-light" onclick="location.href='@Url.Action("","HomePage")'">Home</button>
+
+                    <button class="btn btn-dark btn-outline-light" id="fullscreen-btn" onclick="openFullscreen()">Fullscreen</button>
+                </div>
+            </div>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <p class="nav navbar-text navbar-right">@User.Identity.Name</p>
+            </div>
+
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2 col-lg-2 justify-content-between">
+                <div style="margin-bottom:2.5%; margin-top:2.5%">
+                    <img src="~/Content/ressources/providerssadmintile.png" onclick="location.href='@Url.Action("","Providers")'" onfocus="" class="rounded img-fluid" style="cursor:pointer" />
+                </div>
+                <div style="margin-bottom:2.5%">
+                    <img src="~/Content/ressources/contractsadmintile.png" onclick="location.href='@Url.Action("","Contracts")'" onfocus="" class="rounded img-fluid" style="cursor:pointer" />
+                </div>
+                <div style="margin-bottom:2.5%">
+                    <img src="~/Content/ressources/posteadmintile.png" onclick="location.href='@Url.Action("","Postes")'" onfocus="" class="rounded img-fluid" style="cursor:pointer" />
+                </div>
+                <div style="margin-bottom:2.5%">
+                    <img src="~/Content/ressources/gazadmintile.png" onclick="location.href='@Url.Action("","Gaz")'" onfocus="" class="rounded img-fluid" style="cursor:pointer" />
+                </div>
+                <div style="margin-bottom:2.5%">
+                    <img src="~/Content/ressources/bottlesadmintile.png" onclick="location.href='@Url.Action("","Bottle")'" onfocus="" class="rounded img-fluid" style="cursor:pointer" />
+                </div>
+                <div style="margin-bottom:2.5%">
+                    <img src="~/Content/ressources/orderadmintile.png" onclick="location.href='@Url.Action("","Orders")'" onfocus="" class="rounded img-fluid" style="cursor:pointer" />
+                </div>
+                <div style="margin-bottom:2.5%">
+                    <img src="~/Content/ressources/deliveryadmintile.png" onclick="location.href='@Url.Action("","Deliveries")'" onfocus="" class="rounded img-fluid" style="cursor:pointer" />
+                </div>
+                <div>
+                    <img src="~/Content/ressources/teamadmintile.png" onclick="location.href='@Url.Action("","Actors")'" onfocus="" class="rounded img-fluid" style="cursor:pointer" />
+                </div>
+            </div>
+            <main class="col-lg-10">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+
+   @RenderSection("scripts", required: false)
+    
+</body>
+</html>
+<script>
+    var elem = document.documentElement;
+    function openFullscreen() {
+      if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+          $("#fullscreen-btn").attr('onclick', 'closeFullscreen()');
+          $("#fullscreen-btn").removeClass('btn-outline-light');
+          $("#fullscreen-btn").addClass('btn-outline-success');
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+          elem.mozRequestFullScreen();
+          $("#fullscreen-btn").attr('onclick', 'closeFullscreen()');
+          $("#fullscreen-btn").removeClass('btn-outline-light');
+          $("#fullscreen-btn").addClass('btn-outline-success');
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+          elem.webkitRequestFullscreen();
+          $("#fullscreen-btn").attr('onclick', 'closeFullscreen()');
+          $("#fullscreen-btn").removeClass('btn-outline-light');
+          $("#fullscreen-btn").addClass('btn-outline-success');
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+          elem.msRequestFullscreen();
+          $("#fullscreen-btn").attr('onclick', 'closeFullscreen()');
+          $("#fullscreen-btn").removeClass('btn-outline-light');
+          $("#fullscreen-btn").addClass('btn-outline-success');
+      }
+    }
+
+    function closeFullscreen() {
+      if (document.exitFullscreen) {
+          document.exitFullscreen();
+          $("#fullscreen-btn").attr('onclick', 'openFullscreen()');
+          $("#fullscreen-btn").removeClass('btn-outline-success');
+          $("#fullscreen-btn").addClass('btn-outline-light');
+      } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+          $("#fullscreen-btn").attr('onclick', 'openFullscreen()');
+          $("#fullscreen-btn").removeClass('btn-outline-success');
+          $("#fullscreen-btn").addClass('btn-outline-light');
+      } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+          $("#fullscreen-btn").attr('onclick', 'openFullscreen()');
+          $("#fullscreen-btn").removeClass('btn-outline-success');
+          $("#fullscreen-btn").addClass('btn-outline-light');
+      } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+          $("#fullscreen-btn").attr('onclick', 'openFullscreen()');
+          $("#fullscreen-btn").removeClass('btn-outline-success');
+          $("#fullscreen-btn").addClass('btn-outline-light');
+      }
+    }
+</script>

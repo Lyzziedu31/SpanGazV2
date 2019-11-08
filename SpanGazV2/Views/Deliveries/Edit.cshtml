@@ -1,0 +1,85 @@
+﻿@model SpanGazV2.Models.tbl_607_shipping_delivery
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="margin-left: 15px; color:#ffbe2e">Edit Deliveries</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            <a style="color:#ffbe2e; margin-left:15px">BL ref</a>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.BL_ref, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BL_ref, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a style="color:#ffbe2e; margin-left:15px">Reception date</a>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.reception_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.reception_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a style="color:#ffbe2e; margin-left:15px">Shipping request</a>
+            <div class="row">
+                <div class="col-md-3" style="margin-left: 15px">
+                    @Html.DropDownList("FK_ID_shipping_request", null, htmlAttributes: new { @class = "form-control", @id = "ddlShRqst", onchange = "return GetShRqst()" })
+                    @Html.ValidationMessageFor(model => model.FK_ID_shipping_request, "", new { @class = "text-danger" })
+                </div>
+                <div id="PartialShippingRequest" class="col-md-6" style="margin-left:50px">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" value="Save" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <button type="button" class="btn btn-danger" style="margin-left: 15px">@Html.ActionLink("Back to List", "Index")</button>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+    function GetShRqst() {
+        var id = document.getElementById("ddlShRqst").value;
+        console.log(id);
+        if (id == 0) {
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("GetShippingRequest")',
+            dataType: "html",
+            data: { "IDShippingRequest": id },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialShippingRequest').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+    </script>
+}

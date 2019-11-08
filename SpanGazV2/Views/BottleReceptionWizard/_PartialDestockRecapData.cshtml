@@ -1,0 +1,147 @@
+﻿@model SpanGazV2.Models.DestockBottleInfos
+
+    <div class="row">
+        <div class="col-xl-4 col-sm-12">
+            <div class="row" style="margin-bottom:20px">
+                <div class="col-xl-6 col-sm-12">
+                    <div class="row">
+                        <a style="color:#ffbe2e">Conti bottle number:</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-12 form-control" id="contiBottleNumber">
+                            @Html.DisplayFor(model => model.contiNumber)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-12">
+                    <div class="row">
+                        <a style="color:#ffbe2e">Manufacturer bottle number:</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-12 form-control">
+                            @Html.DisplayFor(model => model.manufacturerNumber)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="col-xl-6 col-sm-12">
+                    <div class="row">
+                        <a style="color:#ffbe2e">Contract number:</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-12 form-control">
+                            @Html.DisplayFor(model => model.contractNumber)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-12">
+                    <div class="row">
+                        <a style="color:#ffbe2e">Poste number:</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-12 form-control">
+                            @Html.DisplayFor(model => model.posteNumber)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="col-xl-6 col-sm-12">
+                    <div class="row">
+                        <a style="color:#ffbe2e">Fabrication date:</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-12 form-control">
+                            @Html.DisplayFor(model => model.fabricationDate)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-12">
+                    <div class="row">
+                        <a style="color:#ffbe2e">Expiration date:</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-12 form-control">
+                            @Html.DisplayFor(model => model.expirationDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="col-xl-6 col-sm-12">
+                    <div class="row">
+                        <a style="color:#ffbe2e">Reception date:</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-12 form-control">
+                            @Html.DisplayFor(model => model.receptionDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-sm-12">
+            <div class="row">
+                <a style="color:#ffbe2e">Content:</a>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-sm">
+                        @foreach (var item in ViewBag.MyDictionary)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Key
+                                </td>
+                                <td>
+                                    @item.Value
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-danger" id="alertMessage" style="margin-top:5%" role="alert">
+        Do you want really return bottle?
+    </div>
+<button id="actionButton" class="btn btn-danger" onclick="ValidDestock()">Confirm</button>|<button class="btn btn-success" id="returnButton">Cancel</button>
+    
+
+
+
+<script>
+    function ValidDestock() {
+        var contiBottleNumber = $('#contiBottleNumber').text();
+        console.log("contiBottleNumber:");
+        console.log(contiBottleNumber.trim());
+        $.ajax({
+                url: '@Url.Action("ValidDestock")',
+            dataType: "html",
+            cache: false,
+            data: { "contiBottleNumber": contiBottleNumber.trim() },
+                type: "POST",
+                //contentType: "application/json",
+            success: function (response) {
+                obj = JSON.parse(response);
+                $("#alertMessage").removeClass('alert-danger');
+                $("#alertMessage").addClass('alert-success');
+                $("#alertMessage").text('Success');
+                $("#returnButton").css('visibility','hidden');
+                $("#actionButton").removeClass('btn-danger');
+                $("#actionButton").addClass('btn-success');
+                $("#actionButton").text('Back');
+                window.location = obj.mailText;
+                $("#actionButton").attr('onClick', 'window.location = "/BottleReceptionWizard"');
+                
+            },
+
+             error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+    }
+</script>
+

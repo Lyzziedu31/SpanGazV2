@@ -1,0 +1,100 @@
+﻿@model SpanGazV2.Models.tbl_607_order_details
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 style="margin-left: 15px; color:#ffbe2e">Edit poste</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group row">
+
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Poste number</a>
+                @Html.EditorFor(model => model.poste_number, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:15px", @id = "ddlPosteNumber", @onchange = "PosteEditNumberControl()" } })
+                @Html.ValidationMessageFor(model => model.poste_number, "", new { @class = "text-danger", @style = "margin-left:15px" })
+            </div>
+            <div class="col-1" id="messageposte" style="margin-top: -5px; margin-left: 20px; visibility:hidden">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Contract</a>
+                @Html.DropDownList("FK_ID_order", null, htmlAttributes: new { @class = "form-control", @style = "margin-left:15px" })
+                @Html.ValidationMessageFor(model => model.FK_ID_order, "", new { @class = "text-danger", @style = "margin-left:15px" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group row">
+
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Contract Q</a>
+                @Html.EditorFor(model => model.order_quantity, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:15px" } })
+                @Html.ValidationMessageFor(model => model.order_quantity, "", new { @class = "text-danger", @style = "margin-left:15px" })
+            </div>
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Recieved Q</a>
+                @Html.EditorFor(model => model.recieved_quantity, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:15px" } })
+                @Html.ValidationMessageFor(model => model.recieved_quantity, "", new { @class = "text-danger", @style = "margin-left:15px" })
+            </div>
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Stock min</a>
+                @Html.EditorFor(model => model.stock_mini, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:15px" } })
+                @Html.ValidationMessageFor(model => model.stock_mini, "", new { @class = "text-danger", @style = "margin-left:15px" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Shipping delays (days)</a>
+                @Html.EditorFor(model => model.shipping_delays, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:15px" } })
+                @Html.ValidationMessageFor(model => model.shipping_delays, "", new { @class = "text-danger", @style = "margin-left:15px" })
+            </div>
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Gaz lifetime (months)</a>
+                @Html.EditorFor(model => model.gaz_lifetime, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:15px" } })
+                @Html.ValidationMessageFor(model => model.gaz_lifetime, "", new { @class = "text-danger", @style = "margin-left:15px" })
+            </div>
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Packaging</a>
+                @Html.DropDownList("FK_ID_packaging", null, htmlAttributes: new { @class = "form-control", @style = "margin-left:15px" })
+                @Html.ValidationMessageFor(model => model.FK_ID_packaging, "", new { @class = "text-danger", @style = "margin-left:15px" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a style="color:#ffbe2e">Content</a>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.content_comments, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.content_comments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button id="buttonCreate" type="submit" value="Save" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <button class="btn btn-danger" style="margin-left:15px" onclick="GetPostes()">Back to list</button>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+}

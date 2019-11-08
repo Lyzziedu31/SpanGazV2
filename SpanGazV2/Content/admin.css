@@ -1,0 +1,38 @@
+.background-admin {
+    background-color: white;
+    
+}
+html, body, .container-fluid, .row {
+    height: 100%;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar {
+    background-color: #343a40;
+}
+
+@media (min-width: 992px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: block;
+        background-color: #343a40;
+    }
+}
+a {
+    color: #ffbe2e;
+    text-decoration-style: none;
+    background-color: transparent;
+}
+.row-height {
+    height: 100vh;
+}
+.scrolling {
+    height: 100%;
+    overflow-y: scroll;
+}

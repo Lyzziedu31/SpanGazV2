@@ -1,0 +1,49 @@
+﻿@model List<SpanGazV2.Models.tbl_607_gaz>
+
+
+    <div class="table-responsive">
+        <table class="table table-dark table-striped  table-sm">
+            <tr>
+                <th scope="col">
+                    <a style="color:#ffbe2e">Gaz type</a>
+                </th>
+                <th scope="col">
+                    <a style="color:#ffbe2e">Theorical content</a>
+                </th>
+                <th scope="col">
+                    <a style="color:#ffbe2e">Unit</a>
+                </th>
+                <th scope="col">
+                    <a style="color:#ffbe2e">Made tolerance</a>
+                </th>
+                <th scope="col">
+                    <a style="color:#ffbe2e">Unit</a>
+                </th>
+            </tr>
+
+            @foreach (SpanGazV2.Models.tbl_607_gaz tbl_607_gaz in Model)
+            {
+                <tr>
+                    <th scope="col">
+                        @tbl_607_gaz.tbl_607_gaz_type.gaz_type
+                    </th>
+
+                    <th scope="col">
+                        @tbl_607_gaz.tbl_607_theorical_content.theorical_content
+                    </th>
+
+                    <th scope="col">
+                        @tbl_607_gaz.tbl_607_units2.unit
+                    </th>
+
+                    <th scope="col">
+                        @tbl_607_gaz.tbl_607_made_tolerance.made_tolerance
+                    </th>
+
+                    <th scope="col">
+                        @tbl_607_gaz.tbl_607_units.unit
+                    </th>
+                </tr>
+            }
+        </table>
+    </div>

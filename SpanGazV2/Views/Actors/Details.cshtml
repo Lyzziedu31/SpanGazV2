@@ -1,0 +1,50 @@
+﻿@model SpanGazV2.Models.tbl_607_actors
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="color:#ffbe2e">Actor details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <a style="color:#ffbe2e">ID_UID</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.id_uid)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">First name</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.first_name)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Last name</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.last_name)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Rôle</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.role)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <button type="button" class="btn btn-warning" style="margin-right: 5px">@Html.ActionLink("Edit", "Edit", new { id = Model.id })</button> |
+    <button type="button" class="btn btn-danger" style="margin-left: 5px">@Html.ActionLink("Back to List", "Index")</button>
+</p>

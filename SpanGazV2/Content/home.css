@@ -1,0 +1,42 @@
+.conti-color
+{
+    color: #ffbe2e;
+}
+
+.login-size
+{
+    max-width: 500px;
+    max-height: 500px;
+}
+.inline-center
+{
+    display: inline;
+    vertical-align: center;
+
+}
+.background {
+    background-color: #6c6c6c;
+    /*background-image: url("../Content/ressources/background1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;*/
+}
+.font-app-title
+{
+    font-family:"Agency FB";
+    font-size: 90px;
+    font-style: italic;
+    color: black;
+}
+
+.make_margin_bottom
+{
+    margin: 50%;
+}
+.flex
+{
+flex: 1 1 auto;
+}
+
+
+
+

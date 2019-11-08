@@ -1,0 +1,1586 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="database_tc2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_607_actors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_uid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_bottle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="manufacturer_bottle_number" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="bottle_conti_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FK_ID_location" Type="int" Nullable="false" />
+          <Property Name="FK_ID_shipping_delivery" Type="int" Nullable="false" />
+          <Property Name="FK_ID_order" Type="int" Nullable="false" />
+          <Property Name="FK_ID_conformity_certificate" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_comments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_UID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_conformity_certificate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="fabrication_date" Type="date" Nullable="false" />
+          <Property Name="expiration date" Type="date" Nullable="false" />
+          <Property Name="FK_ID_real_gaz_content" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_607_gaz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_ID_theorical_content" Type="int" Nullable="false" />
+          <Property Name="FK_ID_made_tolerance" Type="int" Nullable="false" />
+          <Property Name="FK_ID_gaz_type" Type="int" Nullable="false" />
+          <Property Name="FK_ID_testing_tolerance" Type="int" Nullable="false" />
+          <Property Name="FK_ID_order_details" Type="int" Nullable="false" />
+          <Property Name="FK_ID_unit_made_tolerance" Type="int" Nullable="false" />
+          <Property Name="FK_ID_unit_testing_tolerance" Type="int" Nullable="false" />
+          <Property Name="FK_ID_unit_theorical_content" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_gaz_reporting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reporting date" Type="datetime" Nullable="false" />
+          <Property Name="FK_ID_actors" Type="int" Nullable="false" />
+          <Property Name="pressure_value" Type="int" Nullable="false" />
+          <Property Name="FK_ID_bottle" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_gaz_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gaz_type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_join_bottle_gaz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="FK_ID_gaz" Type="int" Nullable="false" />
+          <Property Name="FK_ID_bottle" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_ID_real_content" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_607_location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bottle_location" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_made_tolerance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="made_tolerance" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="start_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="date" Nullable="false" />
+          <Property Name="order_number" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="shipping_request_active" Type="bit" Nullable="false" />
+          <Property Name="item_reception_active" Type="bit" Nullable="false" />
+          <Property Name="FK_ID_provider" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_order_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_quantity" Type="int" Nullable="false" />
+          <Property Name="recieved_quantity" Type="int" Nullable="false" />
+          <Property Name="poste_number" Type="int" Nullable="false" />
+          <Property Name="shipping_delays" Type="int" Nullable="false" />
+          <Property Name="gaz_lifetime" Type="int" Nullable="false" />
+          <Property Name="FK_ID_packaging" Type="int" Nullable="false" />
+          <Property Name="FK_ID_order" Type="int" Nullable="false" />
+          <Property Name="stock_mini" Type="int" Nullable="false" />
+          <Property Name="content_comments" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_607_packaging">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="packaging" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_provider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provider_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="cp" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="town" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="adress_compl" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_607_real_gaz_content">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="real_content" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_shipping_delivery">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BL_ref" Type="int" Nullable="false" />
+          <Property Name="reception_date" Type="date" Nullable="false" />
+          <Property Name="FK_ID_shipping_request" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_shipping_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="delivery_quantity" Type="int" Nullable="false" />
+          <Property Name="FK_ID_shipping_delivery" Type="int" Nullable="false" />
+          <Property Name="FK_ID_gaz" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_shipping_request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="request_date" Type="date" Nullable="false" />
+          <Property Name="FK_order" Type="int" Nullable="false" />
+          <Property Name="FK_ID_actors" Type="int" Nullable="false" />
+          <Property Name="shipping_request_ref" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_607_shipping_request_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shipping_quantity" Type="int" />
+          <Property Name="FK_shipping_request" Type="int" Nullable="false" />
+          <Property Name="FK_ID_order_details" Type="int" Nullable="false" />
+          <Property Name="reception_quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_607_testing_tolerance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="testing_tolerance" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_theorical_content">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="theorical_content" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_units">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="unit" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_tbl_607_bottle_tbl_607_conformity_certificate">
+          <End Role="tbl_607_conformity_certificate" Type="Self.tbl_607_conformity_certificate" Multiplicity="1" />
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_conformity_certificate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_bottle">
+              <PropertyRef Name="FK_ID_conformity_certificate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_bottle_tbl_607_location">
+          <End Role="tbl_607_location" Type="Self.tbl_607_location" Multiplicity="1" />
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_bottle">
+              <PropertyRef Name="FK_ID_location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_bottle_tbl_607_order">
+          <End Role="tbl_607_order" Type="Self.tbl_607_order" Multiplicity="1" />
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_bottle">
+              <PropertyRef Name="FK_ID_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_bottle_tbl_607_shipping_delivery">
+          <End Role="tbl_607_shipping_delivery" Type="Self.tbl_607_shipping_delivery" Multiplicity="1" />
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_shipping_delivery">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_bottle">
+              <PropertyRef Name="FK_ID_shipping_delivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_reporting_tbl_607_actors1">
+          <End Role="tbl_607_actors" Type="Self.tbl_607_actors" Multiplicity="1" />
+          <End Role="tbl_607_gaz_reporting" Type="Self.tbl_607_gaz_reporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz_reporting">
+              <PropertyRef Name="FK_ID_actors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_reporting_tbl_607_bottle">
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="1" />
+          <End Role="tbl_607_gaz_reporting" Type="Self.tbl_607_gaz_reporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_bottle">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz_reporting">
+              <PropertyRef Name="FK_ID_bottle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_gaz_type">
+          <End Role="tbl_607_gaz_type" Type="Self.tbl_607_gaz_type" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_gaz_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_gaz_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_made_tolerance">
+          <End Role="tbl_607_made_tolerance" Type="Self.tbl_607_made_tolerance" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_made_tolerance">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_made_tolerance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_MadeToleranceUnits">
+          <End Role="tbl_607_units" Type="Self.tbl_607_units" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_unit_made_tolerance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_order_details">
+          <End Role="tbl_607_order_details" Type="Self.tbl_607_order_details" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order_details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_order_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_testing_tolerance">
+          <End Role="tbl_607_testing_tolerance" Type="Self.tbl_607_testing_tolerance" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_testing_tolerance">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_testing_tolerance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_TestingToleranceUnits">
+          <End Role="tbl_607_units" Type="Self.tbl_607_units" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_unit_testing_tolerance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_theorical_content">
+          <End Role="tbl_607_theorical_content" Type="Self.tbl_607_theorical_content" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_theorical_content">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_theorical_content" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_TheoricalContentUnits">
+          <End Role="tbl_607_units" Type="Self.tbl_607_units" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_unit_theorical_content" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_join_bottle_gaz_tbl_607_bottle1">
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="1" />
+          <End Role="tbl_607_join_bottle_gaz" Type="Self.tbl_607_join_bottle_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_bottle">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_join_bottle_gaz">
+              <PropertyRef Name="FK_ID_bottle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_join_bottle_gaz_tbl_607_gaz1">
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="1" />
+          <End Role="tbl_607_join_bottle_gaz" Type="Self.tbl_607_join_bottle_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_gaz">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_join_bottle_gaz">
+              <PropertyRef Name="FK_ID_gaz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_join_bottle_gaz_tbl_607_real_gaz_content">
+          <End Role="tbl_607_real_gaz_content" Type="Self.tbl_607_real_gaz_content" Multiplicity="0..1" />
+          <End Role="tbl_607_join_bottle_gaz" Type="Self.tbl_607_join_bottle_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_real_gaz_content">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_join_bottle_gaz">
+              <PropertyRef Name="FK_ID_real_content" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_order_details_tbl_607_order">
+          <End Role="tbl_607_order" Type="Self.tbl_607_order" Multiplicity="1" />
+          <End Role="tbl_607_order_details" Type="Self.tbl_607_order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_order_details">
+              <PropertyRef Name="FK_ID_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_order_details_tbl_607_packaging">
+          <End Role="tbl_607_packaging" Type="Self.tbl_607_packaging" Multiplicity="1" />
+          <End Role="tbl_607_order_details" Type="Self.tbl_607_order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_packaging">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_order_details">
+              <PropertyRef Name="FK_ID_packaging" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_order_tbl_607_provider1">
+          <End Role="tbl_607_provider" Type="Self.tbl_607_provider" Multiplicity="1" />
+          <End Role="tbl_607_order" Type="Self.tbl_607_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_provider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_order">
+              <PropertyRef Name="FK_ID_provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_delivery_tbl_607_shipping_request">
+          <End Role="tbl_607_shipping_request" Type="Self.tbl_607_shipping_request" Multiplicity="1" />
+          <End Role="tbl_607_shipping_delivery" Type="Self.tbl_607_shipping_delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_shipping_request">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_delivery">
+              <PropertyRef Name="FK_ID_shipping_request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_request_details_tbl_607_order_details">
+          <End Role="tbl_607_order_details" Type="Self.tbl_607_order_details" Multiplicity="1" />
+          <End Role="tbl_607_shipping_request_details" Type="Self.tbl_607_shipping_request_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order_details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_request_details">
+              <PropertyRef Name="FK_ID_order_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_request_details_tbl_607_shipping_request">
+          <End Role="tbl_607_shipping_request" Type="Self.tbl_607_shipping_request" Multiplicity="1" />
+          <End Role="tbl_607_shipping_request_details" Type="Self.tbl_607_shipping_request_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_shipping_request">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_request_details">
+              <PropertyRef Name="FK_shipping_request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_request_tbl_607_actors1">
+          <End Role="tbl_607_actors" Type="Self.tbl_607_actors" Multiplicity="1" />
+          <End Role="tbl_607_shipping_request" Type="Self.tbl_607_shipping_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_request">
+              <PropertyRef Name="FK_ID_actors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_request_tbl_607_order">
+          <End Role="tbl_607_order" Type="Self.tbl_607_order" Multiplicity="1" />
+          <End Role="tbl_607_shipping_request" Type="Self.tbl_607_shipping_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_request">
+              <PropertyRef Name="FK_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="database_tc2ModelStoreContainer">
+          <EntitySet Name="tbl_607_actors" EntityType="Self.tbl_607_actors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_bottle" EntityType="Self.tbl_607_bottle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_comments" EntityType="Self.tbl_607_comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_conformity_certificate" EntityType="Self.tbl_607_conformity_certificate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_gaz" EntityType="Self.tbl_607_gaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_gaz_reporting" EntityType="Self.tbl_607_gaz_reporting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_gaz_type" EntityType="Self.tbl_607_gaz_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_join_bottle_gaz" EntityType="Self.tbl_607_join_bottle_gaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_location" EntityType="Self.tbl_607_location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_made_tolerance" EntityType="Self.tbl_607_made_tolerance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_order" EntityType="Self.tbl_607_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_order_details" EntityType="Self.tbl_607_order_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_packaging" EntityType="Self.tbl_607_packaging" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_provider" EntityType="Self.tbl_607_provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_real_gaz_content" EntityType="Self.tbl_607_real_gaz_content" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_shipping_delivery" EntityType="Self.tbl_607_shipping_delivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_shipping_details" EntityType="Self.tbl_607_shipping_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_shipping_request" EntityType="Self.tbl_607_shipping_request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_shipping_request_details" EntityType="Self.tbl_607_shipping_request_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_testing_tolerance" EntityType="Self.tbl_607_testing_tolerance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_theorical_content" EntityType="Self.tbl_607_theorical_content" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_607_units" EntityType="Self.tbl_607_units" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_607_bottle_tbl_607_conformity_certificate" Association="Self.FK_tbl_607_bottle_tbl_607_conformity_certificate">
+            <End Role="tbl_607_conformity_certificate" EntitySet="tbl_607_conformity_certificate" />
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_bottle_tbl_607_location" Association="Self.FK_tbl_607_bottle_tbl_607_location">
+            <End Role="tbl_607_location" EntitySet="tbl_607_location" />
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_bottle_tbl_607_order" Association="Self.FK_tbl_607_bottle_tbl_607_order">
+            <End Role="tbl_607_order" EntitySet="tbl_607_order" />
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_bottle_tbl_607_shipping_delivery" Association="Self.FK_tbl_607_bottle_tbl_607_shipping_delivery">
+            <End Role="tbl_607_shipping_delivery" EntitySet="tbl_607_shipping_delivery" />
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_reporting_tbl_607_actors1" Association="Self.FK_tbl_607_gaz_reporting_tbl_607_actors1">
+            <End Role="tbl_607_actors" EntitySet="tbl_607_actors" />
+            <End Role="tbl_607_gaz_reporting" EntitySet="tbl_607_gaz_reporting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_reporting_tbl_607_bottle" Association="Self.FK_tbl_607_gaz_reporting_tbl_607_bottle">
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+            <End Role="tbl_607_gaz_reporting" EntitySet="tbl_607_gaz_reporting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_gaz_type" Association="Self.FK_tbl_607_gaz_tbl_607_gaz_type">
+            <End Role="tbl_607_gaz_type" EntitySet="tbl_607_gaz_type" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_made_tolerance" Association="Self.FK_tbl_607_gaz_tbl_607_made_tolerance">
+            <End Role="tbl_607_made_tolerance" EntitySet="tbl_607_made_tolerance" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_MadeToleranceUnits" Association="Self.FK_tbl_607_gaz_tbl_607_MadeToleranceUnits">
+            <End Role="tbl_607_units" EntitySet="tbl_607_units" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_order_details" Association="Self.FK_tbl_607_gaz_tbl_607_order_details">
+            <End Role="tbl_607_order_details" EntitySet="tbl_607_order_details" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_testing_tolerance" Association="Self.FK_tbl_607_gaz_tbl_607_testing_tolerance">
+            <End Role="tbl_607_testing_tolerance" EntitySet="tbl_607_testing_tolerance" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_TestingToleranceUnits" Association="Self.FK_tbl_607_gaz_tbl_607_TestingToleranceUnits">
+            <End Role="tbl_607_units" EntitySet="tbl_607_units" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_theorical_content" Association="Self.FK_tbl_607_gaz_tbl_607_theorical_content">
+            <End Role="tbl_607_theorical_content" EntitySet="tbl_607_theorical_content" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_TheoricalContentUnits" Association="Self.FK_tbl_607_gaz_tbl_607_TheoricalContentUnits">
+            <End Role="tbl_607_units" EntitySet="tbl_607_units" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_join_bottle_gaz_tbl_607_bottle1" Association="Self.FK_tbl_607_join_bottle_gaz_tbl_607_bottle1">
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+            <End Role="tbl_607_join_bottle_gaz" EntitySet="tbl_607_join_bottle_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_join_bottle_gaz_tbl_607_gaz1" Association="Self.FK_tbl_607_join_bottle_gaz_tbl_607_gaz1">
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+            <End Role="tbl_607_join_bottle_gaz" EntitySet="tbl_607_join_bottle_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_join_bottle_gaz_tbl_607_real_gaz_content" Association="Self.FK_tbl_607_join_bottle_gaz_tbl_607_real_gaz_content">
+            <End Role="tbl_607_real_gaz_content" EntitySet="tbl_607_real_gaz_content" />
+            <End Role="tbl_607_join_bottle_gaz" EntitySet="tbl_607_join_bottle_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_order_details_tbl_607_order" Association="Self.FK_tbl_607_order_details_tbl_607_order">
+            <End Role="tbl_607_order" EntitySet="tbl_607_order" />
+            <End Role="tbl_607_order_details" EntitySet="tbl_607_order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_order_details_tbl_607_packaging" Association="Self.FK_tbl_607_order_details_tbl_607_packaging">
+            <End Role="tbl_607_packaging" EntitySet="tbl_607_packaging" />
+            <End Role="tbl_607_order_details" EntitySet="tbl_607_order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_order_tbl_607_provider1" Association="Self.FK_tbl_607_order_tbl_607_provider1">
+            <End Role="tbl_607_provider" EntitySet="tbl_607_provider" />
+            <End Role="tbl_607_order" EntitySet="tbl_607_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_delivery_tbl_607_shipping_request" Association="Self.FK_tbl_607_shipping_delivery_tbl_607_shipping_request">
+            <End Role="tbl_607_shipping_request" EntitySet="tbl_607_shipping_request" />
+            <End Role="tbl_607_shipping_delivery" EntitySet="tbl_607_shipping_delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_request_details_tbl_607_order_details" Association="Self.FK_tbl_607_shipping_request_details_tbl_607_order_details">
+            <End Role="tbl_607_order_details" EntitySet="tbl_607_order_details" />
+            <End Role="tbl_607_shipping_request_details" EntitySet="tbl_607_shipping_request_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_request_details_tbl_607_shipping_request" Association="Self.FK_tbl_607_shipping_request_details_tbl_607_shipping_request">
+            <End Role="tbl_607_shipping_request" EntitySet="tbl_607_shipping_request" />
+            <End Role="tbl_607_shipping_request_details" EntitySet="tbl_607_shipping_request_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_request_tbl_607_actors1" Association="Self.FK_tbl_607_shipping_request_tbl_607_actors1">
+            <End Role="tbl_607_actors" EntitySet="tbl_607_actors" />
+            <End Role="tbl_607_shipping_request" EntitySet="tbl_607_shipping_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_request_tbl_607_order" Association="Self.FK_tbl_607_shipping_request_tbl_607_order">
+            <End Role="tbl_607_order" EntitySet="tbl_607_order" />
+            <End Role="tbl_607_shipping_request" EntitySet="tbl_607_shipping_request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="database_tc2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_607_actors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_uid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_607_gaz_reporting" Relationship="Self.FK_tbl_607_gaz_reporting_tbl_607_actors1" FromRole="tbl_607_actors" ToRole="tbl_607_gaz_reporting" />
+          <NavigationProperty Name="tbl_607_shipping_request" Relationship="Self.FK_tbl_607_shipping_request_tbl_607_actors1" FromRole="tbl_607_actors" ToRole="tbl_607_shipping_request" />
+        </EntityType>
+        <EntityType Name="tbl_607_bottle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="manufacturer_bottle_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bottle_conti_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FK_ID_location" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_shipping_delivery" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_order" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_conformity_certificate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_607_conformity_certificate" Relationship="Self.FK_tbl_607_bottle_tbl_607_conformity_certificate" FromRole="tbl_607_bottle" ToRole="tbl_607_conformity_certificate" />
+          <NavigationProperty Name="tbl_607_location" Relationship="Self.FK_tbl_607_bottle_tbl_607_location" FromRole="tbl_607_bottle" ToRole="tbl_607_location" />
+          <NavigationProperty Name="tbl_607_order" Relationship="Self.FK_tbl_607_bottle_tbl_607_order" FromRole="tbl_607_bottle" ToRole="tbl_607_order" />
+          <NavigationProperty Name="tbl_607_shipping_delivery" Relationship="Self.FK_tbl_607_bottle_tbl_607_shipping_delivery" FromRole="tbl_607_bottle" ToRole="tbl_607_shipping_delivery" />
+          <NavigationProperty Name="tbl_607_gaz_reporting" Relationship="Self.FK_tbl_607_gaz_reporting_tbl_607_bottle" FromRole="tbl_607_bottle" ToRole="tbl_607_gaz_reporting" />
+          <NavigationProperty Name="tbl_607_join_bottle_gaz" Relationship="Self.FK_tbl_607_join_bottle_gaz_tbl_607_bottle1" FromRole="tbl_607_bottle" ToRole="tbl_607_join_bottle_gaz" />
+        </EntityType>
+        <EntityType Name="tbl_607_comments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_UID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_conformity_certificate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="fabrication_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="expiration_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FK_ID_real_gaz_content" Type="Int32" />
+          <NavigationProperty Name="tbl_607_bottle" Relationship="Self.FK_tbl_607_bottle_tbl_607_conformity_certificate" FromRole="tbl_607_conformity_certificate" ToRole="tbl_607_bottle" />
+        </EntityType>
+        <EntityType Name="tbl_607_gaz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_ID_theorical_content" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_made_tolerance" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_gaz_type" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_testing_tolerance" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_order_details" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_unit_made_tolerance" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_unit_testing_tolerance" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_unit_theorical_content" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_607_gaz_type" Relationship="Self.FK_tbl_607_gaz_tbl_607_gaz_type" FromRole="tbl_607_gaz" ToRole="tbl_607_gaz_type" />
+          <NavigationProperty Name="tbl_607_made_tolerance" Relationship="Self.FK_tbl_607_gaz_tbl_607_made_tolerance" FromRole="tbl_607_gaz" ToRole="tbl_607_made_tolerance" />
+          <NavigationProperty Name="tbl_607_units" Relationship="Self.FK_tbl_607_gaz_tbl_607_MadeToleranceUnits" FromRole="tbl_607_gaz" ToRole="tbl_607_units" />
+          <NavigationProperty Name="tbl_607_order_details" Relationship="Self.FK_tbl_607_gaz_tbl_607_order_details" FromRole="tbl_607_gaz" ToRole="tbl_607_order_details" />
+          <NavigationProperty Name="tbl_607_testing_tolerance" Relationship="Self.FK_tbl_607_gaz_tbl_607_testing_tolerance" FromRole="tbl_607_gaz" ToRole="tbl_607_testing_tolerance" />
+          <NavigationProperty Name="tbl_607_units1" Relationship="Self.FK_tbl_607_gaz_tbl_607_TestingToleranceUnits" FromRole="tbl_607_gaz" ToRole="tbl_607_units" />
+          <NavigationProperty Name="tbl_607_theorical_content" Relationship="Self.FK_tbl_607_gaz_tbl_607_theorical_content" FromRole="tbl_607_gaz" ToRole="tbl_607_theorical_content" />
+          <NavigationProperty Name="tbl_607_units2" Relationship="Self.FK_tbl_607_gaz_tbl_607_TheoricalContentUnits" FromRole="tbl_607_gaz" ToRole="tbl_607_units" />
+          <NavigationProperty Name="tbl_607_join_bottle_gaz" Relationship="Self.FK_tbl_607_join_bottle_gaz_tbl_607_gaz1" FromRole="tbl_607_gaz" ToRole="tbl_607_join_bottle_gaz" />
+        </EntityType>
+        <EntityType Name="tbl_607_gaz_reporting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reporting_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_ID_actors" Type="Int32" Nullable="false" />
+          <Property Name="pressure_value" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_bottle" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_607_actors" Relationship="Self.FK_tbl_607_gaz_reporting_tbl_607_actors1" FromRole="tbl_607_gaz_reporting" ToRole="tbl_607_actors" />
+          <NavigationProperty Name="tbl_607_bottle" Relationship="Self.FK_tbl_607_gaz_reporting_tbl_607_bottle" FromRole="tbl_607_gaz_reporting" ToRole="tbl_607_bottle" />
+        </EntityType>
+        <EntityType Name="tbl_607_gaz_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gaz_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_607_gaz" Relationship="Self.FK_tbl_607_gaz_tbl_607_gaz_type" FromRole="tbl_607_gaz_type" ToRole="tbl_607_gaz" />
+        </EntityType>
+        <EntityType Name="tbl_607_join_bottle_gaz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="FK_ID_gaz" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_bottle" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_ID_real_content" Type="Int32" />
+          <NavigationProperty Name="tbl_607_bottle" Relationship="Self.FK_tbl_607_join_bottle_gaz_tbl_607_bottle1" FromRole="tbl_607_join_bottle_gaz" ToRole="tbl_607_bottle" />
+          <NavigationProperty Name="tbl_607_gaz" Relationship="Self.FK_tbl_607_join_bottle_gaz_tbl_607_gaz1" FromRole="tbl_607_join_bottle_gaz" ToRole="tbl_607_gaz" />
+          <NavigationProperty Name="tbl_607_real_gaz_content" Relationship="Self.FK_tbl_607_join_bottle_gaz_tbl_607_real_gaz_content" FromRole="tbl_607_join_bottle_gaz" ToRole="tbl_607_real_gaz_content" />
+        </EntityType>
+        <EntityType Name="tbl_607_location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bottle_location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_607_bottle" Relationship="Self.FK_tbl_607_bottle_tbl_607_location" FromRole="tbl_607_location" ToRole="tbl_607_bottle" />
+        </EntityType>
+        <EntityType Name="tbl_607_made_tolerance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="made_tolerance" Type="Double" Nullable="false" />
+          <NavigationProperty Name="tbl_607_gaz" Relationship="Self.FK_tbl_607_gaz_tbl_607_made_tolerance" FromRole="tbl_607_made_tolerance" ToRole="tbl_607_gaz" />
+        </EntityType>
+        <EntityType Name="tbl_607_order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="order_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="shipping_request_active" Type="Boolean" Nullable="false" />
+          <Property Name="item_reception_active" Type="Boolean" Nullable="false" />
+          <Property Name="FK_ID_provider" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_607_bottle" Relationship="Self.FK_tbl_607_bottle_tbl_607_order" FromRole="tbl_607_order" ToRole="tbl_607_bottle" />
+          <NavigationProperty Name="tbl_607_order_details" Relationship="Self.FK_tbl_607_order_details_tbl_607_order" FromRole="tbl_607_order" ToRole="tbl_607_order_details" />
+          <NavigationProperty Name="tbl_607_provider" Relationship="Self.FK_tbl_607_order_tbl_607_provider1" FromRole="tbl_607_order" ToRole="tbl_607_provider" />
+          <NavigationProperty Name="tbl_607_shipping_request" Relationship="Self.FK_tbl_607_shipping_request_tbl_607_order" FromRole="tbl_607_order" ToRole="tbl_607_shipping_request" />
+        </EntityType>
+        <EntityType Name="tbl_607_order_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_quantity" Type="Int32" Nullable="false" />
+          <Property Name="recieved_quantity" Type="Int32" Nullable="false" />
+          <Property Name="poste_number" Type="Int32" Nullable="false" />
+          <Property Name="shipping_delays" Type="Int32" Nullable="false" />
+          <Property Name="gaz_lifetime" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_packaging" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_order" Type="Int32" Nullable="false" />
+          <Property Name="stock_mini" Type="Int32" Nullable="false" />
+          <Property Name="content_comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_607_gaz" Relationship="Self.FK_tbl_607_gaz_tbl_607_order_details" FromRole="tbl_607_order_details" ToRole="tbl_607_gaz" />
+          <NavigationProperty Name="tbl_607_order" Relationship="Self.FK_tbl_607_order_details_tbl_607_order" FromRole="tbl_607_order_details" ToRole="tbl_607_order" />
+          <NavigationProperty Name="tbl_607_packaging" Relationship="Self.FK_tbl_607_order_details_tbl_607_packaging" FromRole="tbl_607_order_details" ToRole="tbl_607_packaging" />
+          <NavigationProperty Name="tbl_607_shipping_request_details" Relationship="Self.FK_tbl_607_shipping_request_details_tbl_607_order_details" FromRole="tbl_607_order_details" ToRole="tbl_607_shipping_request_details" />
+        </EntityType>
+        <EntityType Name="tbl_607_packaging">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="packaging" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_607_order_details" Relationship="Self.FK_tbl_607_order_details_tbl_607_packaging" FromRole="tbl_607_packaging" ToRole="tbl_607_order_details" />
+        </EntityType>
+        <EntityType Name="tbl_607_provider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="provider_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="town" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adress_compl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_607_order" Relationship="Self.FK_tbl_607_order_tbl_607_provider1" FromRole="tbl_607_provider" ToRole="tbl_607_order" />
+        </EntityType>
+        <EntityType Name="tbl_607_real_gaz_content">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="real_content" Type="Single" Nullable="false" />
+          <NavigationProperty Name="tbl_607_join_bottle_gaz" Relationship="Self.FK_tbl_607_join_bottle_gaz_tbl_607_real_gaz_content" FromRole="tbl_607_real_gaz_content" ToRole="tbl_607_join_bottle_gaz" />
+        </EntityType>
+        <EntityType Name="tbl_607_shipping_delivery">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BL_ref" Type="Int32" Nullable="false" />
+          <Property Name="reception_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FK_ID_shipping_request" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_607_bottle" Relationship="Self.FK_tbl_607_bottle_tbl_607_shipping_delivery" FromRole="tbl_607_shipping_delivery" ToRole="tbl_607_bottle" />
+          <NavigationProperty Name="tbl_607_shipping_request" Relationship="Self.FK_tbl_607_shipping_delivery_tbl_607_shipping_request" FromRole="tbl_607_shipping_delivery" ToRole="tbl_607_shipping_request" />
+        </EntityType>
+        <EntityType Name="tbl_607_shipping_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="delivery_quantity" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_shipping_delivery" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_gaz" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_607_shipping_request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="request_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FK_order" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_actors" Type="Int32" Nullable="false" />
+          <Property Name="shipping_request_ref" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_607_actors" Relationship="Self.FK_tbl_607_shipping_request_tbl_607_actors1" FromRole="tbl_607_shipping_request" ToRole="tbl_607_actors" />
+          <NavigationProperty Name="tbl_607_order" Relationship="Self.FK_tbl_607_shipping_request_tbl_607_order" FromRole="tbl_607_shipping_request" ToRole="tbl_607_order" />
+          <NavigationProperty Name="tbl_607_shipping_delivery" Relationship="Self.FK_tbl_607_shipping_delivery_tbl_607_shipping_request" FromRole="tbl_607_shipping_request" ToRole="tbl_607_shipping_delivery" />
+          <NavigationProperty Name="tbl_607_shipping_request_details" Relationship="Self.FK_tbl_607_shipping_request_details_tbl_607_shipping_request" FromRole="tbl_607_shipping_request" ToRole="tbl_607_shipping_request_details" />
+        </EntityType>
+        <EntityType Name="tbl_607_shipping_request_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shipping_quantity" Type="Int32" />
+          <Property Name="FK_shipping_request" Type="Int32" Nullable="false" />
+          <Property Name="FK_ID_order_details" Type="Int32" Nullable="false" />
+          <Property Name="reception_quantity" Type="Int32" />
+          <NavigationProperty Name="tbl_607_order_details" Relationship="Self.FK_tbl_607_shipping_request_details_tbl_607_order_details" FromRole="tbl_607_shipping_request_details" ToRole="tbl_607_order_details" />
+          <NavigationProperty Name="tbl_607_shipping_request" Relationship="Self.FK_tbl_607_shipping_request_details_tbl_607_shipping_request" FromRole="tbl_607_shipping_request_details" ToRole="tbl_607_shipping_request" />
+        </EntityType>
+        <EntityType Name="tbl_607_testing_tolerance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="testing_tolerance" Type="Double" Nullable="false" />
+          <NavigationProperty Name="tbl_607_gaz" Relationship="Self.FK_tbl_607_gaz_tbl_607_testing_tolerance" FromRole="tbl_607_testing_tolerance" ToRole="tbl_607_gaz" />
+        </EntityType>
+        <EntityType Name="tbl_607_theorical_content">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="theorical_content" Type="Double" Nullable="false" />
+          <NavigationProperty Name="tbl_607_gaz" Relationship="Self.FK_tbl_607_gaz_tbl_607_theorical_content" FromRole="tbl_607_theorical_content" ToRole="tbl_607_gaz" />
+        </EntityType>
+        <EntityType Name="tbl_607_units">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tbl_607_gaz" Relationship="Self.FK_tbl_607_gaz_tbl_607_MadeToleranceUnits" FromRole="tbl_607_units" ToRole="tbl_607_gaz" />
+          <NavigationProperty Name="tbl_607_gaz1" Relationship="Self.FK_tbl_607_gaz_tbl_607_TestingToleranceUnits" FromRole="tbl_607_units" ToRole="tbl_607_gaz" />
+          <NavigationProperty Name="tbl_607_gaz2" Relationship="Self.FK_tbl_607_gaz_tbl_607_TheoricalContentUnits" FromRole="tbl_607_units" ToRole="tbl_607_gaz" />
+        </EntityType>
+        <Association Name="FK_tbl_607_gaz_reporting_tbl_607_actors1">
+          <End Role="tbl_607_actors" Type="Self.tbl_607_actors" Multiplicity="1" />
+          <End Role="tbl_607_gaz_reporting" Type="Self.tbl_607_gaz_reporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz_reporting">
+              <PropertyRef Name="FK_ID_actors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_request_tbl_607_actors1">
+          <End Role="tbl_607_actors" Type="Self.tbl_607_actors" Multiplicity="1" />
+          <End Role="tbl_607_shipping_request" Type="Self.tbl_607_shipping_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_request">
+              <PropertyRef Name="FK_ID_actors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_bottle_tbl_607_conformity_certificate">
+          <End Role="tbl_607_conformity_certificate" Type="Self.tbl_607_conformity_certificate" Multiplicity="1" />
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_conformity_certificate">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_bottle">
+              <PropertyRef Name="FK_ID_conformity_certificate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_bottle_tbl_607_location">
+          <End Role="tbl_607_location" Type="Self.tbl_607_location" Multiplicity="1" />
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_bottle">
+              <PropertyRef Name="FK_ID_location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_bottle_tbl_607_order">
+          <End Role="tbl_607_order" Type="Self.tbl_607_order" Multiplicity="1" />
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_bottle">
+              <PropertyRef Name="FK_ID_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_bottle_tbl_607_shipping_delivery">
+          <End Role="tbl_607_shipping_delivery" Type="Self.tbl_607_shipping_delivery" Multiplicity="1" />
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_shipping_delivery">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_bottle">
+              <PropertyRef Name="FK_ID_shipping_delivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_reporting_tbl_607_bottle">
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="1" />
+          <End Role="tbl_607_gaz_reporting" Type="Self.tbl_607_gaz_reporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_bottle">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz_reporting">
+              <PropertyRef Name="FK_ID_bottle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_join_bottle_gaz_tbl_607_bottle1">
+          <End Role="tbl_607_bottle" Type="Self.tbl_607_bottle" Multiplicity="1" />
+          <End Role="tbl_607_join_bottle_gaz" Type="Self.tbl_607_join_bottle_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_bottle">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_join_bottle_gaz">
+              <PropertyRef Name="FK_ID_bottle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_gaz_type">
+          <End Role="tbl_607_gaz_type" Type="Self.tbl_607_gaz_type" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_gaz_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_gaz_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_made_tolerance">
+          <End Role="tbl_607_made_tolerance" Type="Self.tbl_607_made_tolerance" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_made_tolerance">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_made_tolerance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_MadeToleranceUnits">
+          <End Role="tbl_607_units" Type="Self.tbl_607_units" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_unit_made_tolerance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_order_details">
+          <End Role="tbl_607_order_details" Type="Self.tbl_607_order_details" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order_details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_order_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_testing_tolerance">
+          <End Role="tbl_607_testing_tolerance" Type="Self.tbl_607_testing_tolerance" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_testing_tolerance">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_testing_tolerance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_TestingToleranceUnits">
+          <End Role="tbl_607_units" Type="Self.tbl_607_units" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_unit_testing_tolerance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_theorical_content">
+          <End Role="tbl_607_theorical_content" Type="Self.tbl_607_theorical_content" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_theorical_content">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_theorical_content" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_gaz_tbl_607_TheoricalContentUnits">
+          <End Role="tbl_607_units" Type="Self.tbl_607_units" Multiplicity="1" />
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_units">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_gaz">
+              <PropertyRef Name="FK_ID_unit_theorical_content" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_join_bottle_gaz_tbl_607_gaz1">
+          <End Role="tbl_607_gaz" Type="Self.tbl_607_gaz" Multiplicity="1" />
+          <End Role="tbl_607_join_bottle_gaz" Type="Self.tbl_607_join_bottle_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_gaz">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_join_bottle_gaz">
+              <PropertyRef Name="FK_ID_gaz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_join_bottle_gaz_tbl_607_real_gaz_content">
+          <End Role="tbl_607_real_gaz_content" Type="Self.tbl_607_real_gaz_content" Multiplicity="0..1" />
+          <End Role="tbl_607_join_bottle_gaz" Type="Self.tbl_607_join_bottle_gaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_real_gaz_content">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_join_bottle_gaz">
+              <PropertyRef Name="FK_ID_real_content" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_order_details_tbl_607_order">
+          <End Role="tbl_607_order" Type="Self.tbl_607_order" Multiplicity="1" />
+          <End Role="tbl_607_order_details" Type="Self.tbl_607_order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_order_details">
+              <PropertyRef Name="FK_ID_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_order_tbl_607_provider1">
+          <End Role="tbl_607_provider" Type="Self.tbl_607_provider" Multiplicity="1" />
+          <End Role="tbl_607_order" Type="Self.tbl_607_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_provider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_order">
+              <PropertyRef Name="FK_ID_provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_request_tbl_607_order">
+          <End Role="tbl_607_order" Type="Self.tbl_607_order" Multiplicity="1" />
+          <End Role="tbl_607_shipping_request" Type="Self.tbl_607_shipping_request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_request">
+              <PropertyRef Name="FK_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_order_details_tbl_607_packaging">
+          <End Role="tbl_607_packaging" Type="Self.tbl_607_packaging" Multiplicity="1" />
+          <End Role="tbl_607_order_details" Type="Self.tbl_607_order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_packaging">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_order_details">
+              <PropertyRef Name="FK_ID_packaging" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_request_details_tbl_607_order_details">
+          <End Role="tbl_607_order_details" Type="Self.tbl_607_order_details" Multiplicity="1" />
+          <End Role="tbl_607_shipping_request_details" Type="Self.tbl_607_shipping_request_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_order_details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_request_details">
+              <PropertyRef Name="FK_ID_order_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_delivery_tbl_607_shipping_request">
+          <End Role="tbl_607_shipping_request" Type="Self.tbl_607_shipping_request" Multiplicity="1" />
+          <End Role="tbl_607_shipping_delivery" Type="Self.tbl_607_shipping_delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_shipping_request">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_delivery">
+              <PropertyRef Name="FK_ID_shipping_request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_607_shipping_request_details_tbl_607_shipping_request">
+          <End Role="tbl_607_shipping_request" Type="Self.tbl_607_shipping_request" Multiplicity="1" />
+          <End Role="tbl_607_shipping_request_details" Type="Self.tbl_607_shipping_request_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_607_shipping_request">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_607_shipping_request_details">
+              <PropertyRef Name="FK_shipping_request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="database_tc2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_607_actors" EntityType="Self.tbl_607_actors" />
+          <EntitySet Name="tbl_607_bottle" EntityType="Self.tbl_607_bottle" />
+          <EntitySet Name="tbl_607_comments" EntityType="Self.tbl_607_comments" />
+          <EntitySet Name="tbl_607_conformity_certificate" EntityType="Self.tbl_607_conformity_certificate" />
+          <EntitySet Name="tbl_607_gaz" EntityType="Self.tbl_607_gaz" />
+          <EntitySet Name="tbl_607_gaz_reporting" EntityType="Self.tbl_607_gaz_reporting" />
+          <EntitySet Name="tbl_607_gaz_type" EntityType="Self.tbl_607_gaz_type" />
+          <EntitySet Name="tbl_607_join_bottle_gaz" EntityType="Self.tbl_607_join_bottle_gaz" />
+          <EntitySet Name="tbl_607_location" EntityType="Self.tbl_607_location" />
+          <EntitySet Name="tbl_607_made_tolerance" EntityType="Self.tbl_607_made_tolerance" />
+          <EntitySet Name="tbl_607_order" EntityType="Self.tbl_607_order" />
+          <EntitySet Name="tbl_607_order_details" EntityType="Self.tbl_607_order_details" />
+          <EntitySet Name="tbl_607_packaging" EntityType="Self.tbl_607_packaging" />
+          <EntitySet Name="tbl_607_provider" EntityType="Self.tbl_607_provider" />
+          <EntitySet Name="tbl_607_real_gaz_content" EntityType="Self.tbl_607_real_gaz_content" />
+          <EntitySet Name="tbl_607_shipping_delivery" EntityType="Self.tbl_607_shipping_delivery" />
+          <EntitySet Name="tbl_607_shipping_details" EntityType="Self.tbl_607_shipping_details" />
+          <EntitySet Name="tbl_607_shipping_request" EntityType="Self.tbl_607_shipping_request" />
+          <EntitySet Name="tbl_607_shipping_request_details" EntityType="Self.tbl_607_shipping_request_details" />
+          <EntitySet Name="tbl_607_testing_tolerance" EntityType="Self.tbl_607_testing_tolerance" />
+          <EntitySet Name="tbl_607_theorical_content" EntityType="Self.tbl_607_theorical_content" />
+          <EntitySet Name="tbl_607_units" EntityType="Self.tbl_607_units" />
+          <AssociationSet Name="FK_tbl_607_gaz_reporting_tbl_607_actors1" Association="Self.FK_tbl_607_gaz_reporting_tbl_607_actors1">
+            <End Role="tbl_607_actors" EntitySet="tbl_607_actors" />
+            <End Role="tbl_607_gaz_reporting" EntitySet="tbl_607_gaz_reporting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_request_tbl_607_actors1" Association="Self.FK_tbl_607_shipping_request_tbl_607_actors1">
+            <End Role="tbl_607_actors" EntitySet="tbl_607_actors" />
+            <End Role="tbl_607_shipping_request" EntitySet="tbl_607_shipping_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_bottle_tbl_607_conformity_certificate" Association="Self.FK_tbl_607_bottle_tbl_607_conformity_certificate">
+            <End Role="tbl_607_conformity_certificate" EntitySet="tbl_607_conformity_certificate" />
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_bottle_tbl_607_location" Association="Self.FK_tbl_607_bottle_tbl_607_location">
+            <End Role="tbl_607_location" EntitySet="tbl_607_location" />
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_bottle_tbl_607_order" Association="Self.FK_tbl_607_bottle_tbl_607_order">
+            <End Role="tbl_607_order" EntitySet="tbl_607_order" />
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_bottle_tbl_607_shipping_delivery" Association="Self.FK_tbl_607_bottle_tbl_607_shipping_delivery">
+            <End Role="tbl_607_shipping_delivery" EntitySet="tbl_607_shipping_delivery" />
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_reporting_tbl_607_bottle" Association="Self.FK_tbl_607_gaz_reporting_tbl_607_bottle">
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+            <End Role="tbl_607_gaz_reporting" EntitySet="tbl_607_gaz_reporting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_join_bottle_gaz_tbl_607_bottle1" Association="Self.FK_tbl_607_join_bottle_gaz_tbl_607_bottle1">
+            <End Role="tbl_607_bottle" EntitySet="tbl_607_bottle" />
+            <End Role="tbl_607_join_bottle_gaz" EntitySet="tbl_607_join_bottle_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_gaz_type" Association="Self.FK_tbl_607_gaz_tbl_607_gaz_type">
+            <End Role="tbl_607_gaz_type" EntitySet="tbl_607_gaz_type" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_made_tolerance" Association="Self.FK_tbl_607_gaz_tbl_607_made_tolerance">
+            <End Role="tbl_607_made_tolerance" EntitySet="tbl_607_made_tolerance" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_MadeToleranceUnits" Association="Self.FK_tbl_607_gaz_tbl_607_MadeToleranceUnits">
+            <End Role="tbl_607_units" EntitySet="tbl_607_units" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_order_details" Association="Self.FK_tbl_607_gaz_tbl_607_order_details">
+            <End Role="tbl_607_order_details" EntitySet="tbl_607_order_details" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_testing_tolerance" Association="Self.FK_tbl_607_gaz_tbl_607_testing_tolerance">
+            <End Role="tbl_607_testing_tolerance" EntitySet="tbl_607_testing_tolerance" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_TestingToleranceUnits" Association="Self.FK_tbl_607_gaz_tbl_607_TestingToleranceUnits">
+            <End Role="tbl_607_units" EntitySet="tbl_607_units" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_theorical_content" Association="Self.FK_tbl_607_gaz_tbl_607_theorical_content">
+            <End Role="tbl_607_theorical_content" EntitySet="tbl_607_theorical_content" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_gaz_tbl_607_TheoricalContentUnits" Association="Self.FK_tbl_607_gaz_tbl_607_TheoricalContentUnits">
+            <End Role="tbl_607_units" EntitySet="tbl_607_units" />
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_join_bottle_gaz_tbl_607_gaz1" Association="Self.FK_tbl_607_join_bottle_gaz_tbl_607_gaz1">
+            <End Role="tbl_607_gaz" EntitySet="tbl_607_gaz" />
+            <End Role="tbl_607_join_bottle_gaz" EntitySet="tbl_607_join_bottle_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_join_bottle_gaz_tbl_607_real_gaz_content" Association="Self.FK_tbl_607_join_bottle_gaz_tbl_607_real_gaz_content">
+            <End Role="tbl_607_real_gaz_content" EntitySet="tbl_607_real_gaz_content" />
+            <End Role="tbl_607_join_bottle_gaz" EntitySet="tbl_607_join_bottle_gaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_order_details_tbl_607_order" Association="Self.FK_tbl_607_order_details_tbl_607_order">
+            <End Role="tbl_607_order" EntitySet="tbl_607_order" />
+            <End Role="tbl_607_order_details" EntitySet="tbl_607_order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_order_tbl_607_provider1" Association="Self.FK_tbl_607_order_tbl_607_provider1">
+            <End Role="tbl_607_provider" EntitySet="tbl_607_provider" />
+            <End Role="tbl_607_order" EntitySet="tbl_607_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_request_tbl_607_order" Association="Self.FK_tbl_607_shipping_request_tbl_607_order">
+            <End Role="tbl_607_order" EntitySet="tbl_607_order" />
+            <End Role="tbl_607_shipping_request" EntitySet="tbl_607_shipping_request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_order_details_tbl_607_packaging" Association="Self.FK_tbl_607_order_details_tbl_607_packaging">
+            <End Role="tbl_607_packaging" EntitySet="tbl_607_packaging" />
+            <End Role="tbl_607_order_details" EntitySet="tbl_607_order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_request_details_tbl_607_order_details" Association="Self.FK_tbl_607_shipping_request_details_tbl_607_order_details">
+            <End Role="tbl_607_order_details" EntitySet="tbl_607_order_details" />
+            <End Role="tbl_607_shipping_request_details" EntitySet="tbl_607_shipping_request_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_delivery_tbl_607_shipping_request" Association="Self.FK_tbl_607_shipping_delivery_tbl_607_shipping_request">
+            <End Role="tbl_607_shipping_request" EntitySet="tbl_607_shipping_request" />
+            <End Role="tbl_607_shipping_delivery" EntitySet="tbl_607_shipping_delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_607_shipping_request_details_tbl_607_shipping_request" Association="Self.FK_tbl_607_shipping_request_details_tbl_607_shipping_request">
+            <End Role="tbl_607_shipping_request" EntitySet="tbl_607_shipping_request" />
+            <End Role="tbl_607_shipping_request_details" EntitySet="tbl_607_shipping_request_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="database_tc2ModelStoreContainer" CdmEntityContainer="database_tc2Entities">
+          <EntitySetMapping Name="tbl_607_actors">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_actors">
+              <MappingFragment StoreEntitySet="tbl_607_actors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_uid" ColumnName="id_uid" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_bottle">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_bottle">
+              <MappingFragment StoreEntitySet="tbl_607_bottle">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="manufacturer_bottle_number" ColumnName="manufacturer_bottle_number" />
+                <ScalarProperty Name="bottle_conti_number" ColumnName="bottle_conti_number" />
+                <ScalarProperty Name="FK_ID_location" ColumnName="FK_ID_location" />
+                <ScalarProperty Name="FK_ID_shipping_delivery" ColumnName="FK_ID_shipping_delivery" />
+                <ScalarProperty Name="FK_ID_order" ColumnName="FK_ID_order" />
+                <ScalarProperty Name="FK_ID_conformity_certificate" ColumnName="FK_ID_conformity_certificate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_comments">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_comments">
+              <MappingFragment StoreEntitySet="tbl_607_comments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_UID" ColumnName="ID_UID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_conformity_certificate">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_conformity_certificate">
+              <MappingFragment StoreEntitySet="tbl_607_conformity_certificate">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="fabrication_date" ColumnName="fabrication_date" />
+                <ScalarProperty Name="expiration_date" ColumnName="expiration date" />
+                <ScalarProperty Name="FK_ID_real_gaz_content" ColumnName="FK_ID_real_gaz_content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_gaz">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_gaz">
+              <MappingFragment StoreEntitySet="tbl_607_gaz">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FK_ID_theorical_content" ColumnName="FK_ID_theorical_content" />
+                <ScalarProperty Name="FK_ID_made_tolerance" ColumnName="FK_ID_made_tolerance" />
+                <ScalarProperty Name="FK_ID_gaz_type" ColumnName="FK_ID_gaz_type" />
+                <ScalarProperty Name="FK_ID_testing_tolerance" ColumnName="FK_ID_testing_tolerance" />
+                <ScalarProperty Name="FK_ID_order_details" ColumnName="FK_ID_order_details" />
+                <ScalarProperty Name="FK_ID_unit_made_tolerance" ColumnName="FK_ID_unit_made_tolerance" />
+                <ScalarProperty Name="FK_ID_unit_testing_tolerance" ColumnName="FK_ID_unit_testing_tolerance" />
+                <ScalarProperty Name="FK_ID_unit_theorical_content" ColumnName="FK_ID_unit_theorical_content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_gaz_reporting">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_gaz_reporting">
+              <MappingFragment StoreEntitySet="tbl_607_gaz_reporting">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="reporting_date" ColumnName="reporting date" />
+                <ScalarProperty Name="FK_ID_actors" ColumnName="FK_ID_actors" />
+                <ScalarProperty Name="pressure_value" ColumnName="pressure_value" />
+                <ScalarProperty Name="FK_ID_bottle" ColumnName="FK_ID_bottle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_gaz_type">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_gaz_type">
+              <MappingFragment StoreEntitySet="tbl_607_gaz_type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="gaz_type" ColumnName="gaz_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_join_bottle_gaz">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_join_bottle_gaz">
+              <MappingFragment StoreEntitySet="tbl_607_join_bottle_gaz">
+                <ScalarProperty Name="FK_ID_gaz" ColumnName="FK_ID_gaz" />
+                <ScalarProperty Name="FK_ID_bottle" ColumnName="FK_ID_bottle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FK_ID_real_content" ColumnName="FK_ID_real_content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_location">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_location">
+              <MappingFragment StoreEntitySet="tbl_607_location">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="bottle_location" ColumnName="bottle_location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_made_tolerance">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_made_tolerance">
+              <MappingFragment StoreEntitySet="tbl_607_made_tolerance">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="made_tolerance" ColumnName="made_tolerance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_order">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_order">
+              <MappingFragment StoreEntitySet="tbl_607_order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="order_number" ColumnName="order_number" />
+                <ScalarProperty Name="shipping_request_active" ColumnName="shipping_request_active" />
+                <ScalarProperty Name="item_reception_active" ColumnName="item_reception_active" />
+                <ScalarProperty Name="FK_ID_provider" ColumnName="FK_ID_provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_order_details">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_order_details">
+              <MappingFragment StoreEntitySet="tbl_607_order_details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="order_quantity" ColumnName="order_quantity" />
+                <ScalarProperty Name="recieved_quantity" ColumnName="recieved_quantity" />
+                <ScalarProperty Name="poste_number" ColumnName="poste_number" />
+                <ScalarProperty Name="shipping_delays" ColumnName="shipping_delays" />
+                <ScalarProperty Name="gaz_lifetime" ColumnName="gaz_lifetime" />
+                <ScalarProperty Name="FK_ID_packaging" ColumnName="FK_ID_packaging" />
+                <ScalarProperty Name="FK_ID_order" ColumnName="FK_ID_order" />
+                <ScalarProperty Name="stock_mini" ColumnName="stock_mini" />
+                <ScalarProperty Name="content_comments" ColumnName="content_comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_packaging">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_packaging">
+              <MappingFragment StoreEntitySet="tbl_607_packaging">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="packaging" ColumnName="packaging" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_provider">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_provider">
+              <MappingFragment StoreEntitySet="tbl_607_provider">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="cp" ColumnName="cp" />
+                <ScalarProperty Name="town" ColumnName="town" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="adress_compl" ColumnName="adress_compl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_real_gaz_content">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_real_gaz_content">
+              <MappingFragment StoreEntitySet="tbl_607_real_gaz_content">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="real_content" ColumnName="real_content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_shipping_delivery">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_shipping_delivery">
+              <MappingFragment StoreEntitySet="tbl_607_shipping_delivery">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BL_ref" ColumnName="BL_ref" />
+                <ScalarProperty Name="reception_date" ColumnName="reception_date" />
+                <ScalarProperty Name="FK_ID_shipping_request" ColumnName="FK_ID_shipping_request" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_shipping_details">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_shipping_details">
+              <MappingFragment StoreEntitySet="tbl_607_shipping_details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="delivery_quantity" ColumnName="delivery_quantity" />
+                <ScalarProperty Name="FK_ID_shipping_delivery" ColumnName="FK_ID_shipping_delivery" />
+                <ScalarProperty Name="FK_ID_gaz" ColumnName="FK_ID_gaz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_shipping_request">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_shipping_request">
+              <MappingFragment StoreEntitySet="tbl_607_shipping_request">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="request_date" ColumnName="request_date" />
+                <ScalarProperty Name="FK_order" ColumnName="FK_order" />
+                <ScalarProperty Name="FK_ID_actors" ColumnName="FK_ID_actors" />
+                <ScalarProperty Name="shipping_request_ref" ColumnName="shipping_request_ref" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_shipping_request_details">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_shipping_request_details">
+              <MappingFragment StoreEntitySet="tbl_607_shipping_request_details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="shipping_quantity" ColumnName="shipping_quantity" />
+                <ScalarProperty Name="FK_shipping_request" ColumnName="FK_shipping_request" />
+                <ScalarProperty Name="FK_ID_order_details" ColumnName="FK_ID_order_details" />
+                <ScalarProperty Name="reception_quantity" ColumnName="reception_quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_testing_tolerance">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_testing_tolerance">
+              <MappingFragment StoreEntitySet="tbl_607_testing_tolerance">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="testing_tolerance" ColumnName="testing_tolerance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_theorical_content">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_theorical_content">
+              <MappingFragment StoreEntitySet="tbl_607_theorical_content">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="theorical_content" ColumnName="theorical_content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_607_units">
+            <EntityTypeMapping TypeName="database_tc2Model.tbl_607_units">
+              <MappingFragment StoreEntitySet="tbl_607_units">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

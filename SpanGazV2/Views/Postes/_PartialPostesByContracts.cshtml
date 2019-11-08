@@ -1,0 +1,198 @@
+﻿@model X.PagedList.IPagedList<SpanGazV2.Models.tbl_607_order_details>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+
+
+
+
+<div class="row">
+    <div class="col-1" style="color:#ffbe2e">Find by poste number: </div>
+    <div class="col-2">
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @style = "margin-left:15px; ", @id = "ddlFilter" })
+    </div>
+    <div class="col-1">
+        <button type="button" onclick="filter()" class="btn btn-light">Search</button>
+    </div>
+</div>
+
+
+<div class="table-responsive" id="content" style="margin-top:15px">
+    <table class="table table-dark table-striped table-sm">
+        <tr>
+            <th scope="col">
+                Poste number
+            </th>
+            <th scope="col">
+                Contract Q
+            </th>
+            <th scope="col">
+                Recieved Q
+            </th>
+            <th scope="col">
+                Stock min
+            </th>
+            <th scope="col">
+                Shipping delays (days)
+            </th>
+            <th scope="col">
+                Gaz lifetime (months)
+            </th>
+            <th scope="col">
+                Content
+            </th>
+            <th scope="col">
+                @*<button class="btn btn-success btn-outline-dark" onclick="location.href='@Url.Action("Create")'">Create</button>*@
+                <button class="btn btn-success btn-outline-dark" onclick="create()">Create</button>
+            </th>
+        </tr>
+
+        @foreach (var tbl_607_order_details in ViewBag.OnePageOfPostes)
+        {
+            <tr>
+                <td scope="col">
+                    @tbl_607_order_details.poste_number
+                </td>
+                <td scope="col">
+                    @tbl_607_order_details.order_quantity
+                </td>
+                <td scope="col">
+                    @tbl_607_order_details.recieved_quantity
+                </td>
+                <td scope="col">
+                    @tbl_607_order_details.stock_mini
+                </td>
+                <td scope="col">
+                    @tbl_607_order_details.shipping_delays
+                </td>
+                <td scope="col">
+                    @tbl_607_order_details.gaz_lifetime
+                </td>
+
+                <td scope="col">
+                    @tbl_607_order_details.content_comments
+                </td>
+                <td scope="col">
+                    <button type="button" class="btn btn-light" onclick="edit(@tbl_607_order_details.ID)"> Edit</button> |
+                    <button type="button" class="btn btn-warning" onclick="details(@tbl_607_order_details.ID)">Details</button> |
+                    <button type="button" class="btn btn-danger" onclick="deleteitem(@tbl_607_order_details.ID)">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div id="contentPager" style="color:#ffbe2e">
+    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfPostes, page => Url.Action("GetPostes", new { page, ViewBag.IDContractNumber}))
+</div>
+
+<script>
+    $(document).ready(function () {
+           $(document).on("click", "#contentPager a[href]", function () {
+                $.ajax({
+                    url: $(this).attr("href"),
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#PartialPostesGaz').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+
+    function filter()
+    {
+        var filter = document.getElementById("ddlFilter").value;
+        var order = document.getElementById("ddlOrder").value;
+        console.log("order:");
+        console.log(order);
+        console.log("filter:");
+        console.log(filter);
+
+        $.ajax({
+            url: '@Url.Action("GetPostes")',
+            dataType: "html",
+            data: { "IDContractNumber": order, "searchString":filter},
+            type: "GET",
+            //contentType: "application/json",
+            success: function (response) {
+                $('#PartialPostesGaz').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+
+    function create()
+    {
+        
+        $.ajax({
+            url: '@Url.Action("Create")',
+            dataType: "html",
+            data: null,
+            type: "GET",
+            //contentType: "application/json",
+            success: function (response) {
+                $('#PartialPostesGaz').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+
+    function edit(id)
+    {
+        console.log(id);
+
+        $.ajax({
+            url: '@Url.Action("Edit")',
+            dataType: "html",
+            data: { id: id },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialPostesGaz').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+
+    function details(id)
+    {
+        $.ajax({
+            url: '@Url.Action("Details")',
+            dataType: "html",
+            data: { id: id },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialPostesGaz').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+
+    function deleteitem(id)
+    {
+        $.ajax({
+            url: '@Url.Action("Delete")',
+            dataType: "html",
+            data: { id: id },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialPostesGaz').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+</script>

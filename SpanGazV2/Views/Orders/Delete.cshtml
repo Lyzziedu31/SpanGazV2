@@ -1,0 +1,54 @@
+﻿@model SpanGazV2.Models.tbl_607_shipping_request
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <h2 class="alert alert-danger">Are you sure you want to delete this?</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <a style="color:#ffbe2e">Contract</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_order.order_number)
+        </dd>
+        
+        <dt>
+            <a style="color:#ffbe2e">Order Ref</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.shipping_request_ref)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Request date</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.request_date)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">First name</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_actors.first_name)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <button type="button" class="btn btn-success" style="margin-right: 5px">@Html.ActionLink("Back to List", "Index")</button>
+        </div>
+    }
+</div>

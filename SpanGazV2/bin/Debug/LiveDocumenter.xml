@@ -1,0 +1,1186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpanGazV2</name>
+    </assembly>
+    <members>
+        <member name="T:SpanGazV2.Controllers.Actors.ActorsController">
+            <summary>
+            Controleur d'administration des acteurs (Team)
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Actors.ActorsController.Index(System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            retourne la liste de tous les acteurs enregistrés dans la base
+            </summary>
+            <param name="sortOrder">retour du filtre selectionné dans le front (X.PagedList)</param>
+            <param name="currentFilter">retour du filtre courant dans le front (X.PagedList)</param>
+            <param name="searchString">retour de la valeur à chercher selectionnée dans le front (X.PagedList)</param>
+            <param name="page">retour du numéro de page selectionné dans le front (X.PagedList)</param>
+            <returns>liste de tous les acteurs filtrés en fonction des paramètres précédents</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Actors.ActorsController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la page Détails de l'acteur séléctionné
+            </summary>
+            <param name="id">id de l'acteur selectionné</param>
+            <returns>retourne les données correspondantes</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Actors.ActorsController.Create">
+            <summary>
+            affiche la page de création d'un nouvel acteur
+            </summary>
+            <returns>retourne la vue</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Actors.ActorsController.Create(SpanGazV2.Models.tbl_607_actors)">
+            <summary>
+            creation d'un nouvel acteur
+            </summary>
+            <param name="tbl_607_actors">binding des données retournées par le front</param>
+            <returns>vue principale si succés</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Actors.ActorsController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            affiche la page d'édition d'un acteur
+            </summary>
+            <param name="id">id de l'acteur selectionné</param>
+            <returns>vue edition</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Actors.ActorsController.Edit(SpanGazV2.Models.tbl_607_actors)">
+            <summary>
+            validation des modification sur l'acteur
+            </summary>
+            <param name="tbl_607_actors">binding des données retournées par le front</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Actors.ActorsController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Suppression d'un acteur
+            </summary>
+            <param name="id">id de l'acteur selectionné</param>
+            <returns>vue suppression</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Actors.ActorsController.DeleteConfirmed(System.Int32)">
+            <summary>
+            confirmation de la suppression
+            </summary>
+            <param name="id">>id de l'acteur à supprimer</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Actors.ActorsController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Controllers.AdminMenu.AdminMenuController">
+            <summary>
+            Controleur de gestion des accés au menus d'administration
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.AdminMenu.AdminMenuController.Index(System.String)">
+            <summary>
+            affiche la page d'accueil de l'activité d'administration, cette activité n'est accessible qu'aux acteurs disposant du rôle "administrateur"
+            </summary>
+            <param name="user">UID de l'acteur</param>
+            <returns>vue administration</returns>
+        </member>
+        <member name="T:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController">
+            <summary>
+            Controlleur de gestion des processus de reception et destockage des bouteilles
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.Index">
+            <summary>
+            affichage de la vue de démarrage du wizard logistique
+            </summary>
+            <returns>vue accueil du wizard</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.GetProcess(System.Nullable{System.Int32})">
+            <summary>
+            choix du process à démarrer
+            </summary>
+            <param name="Process">process selectionné dans le front</param>
+            <returns>vue correspondant au process</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.GetPoste(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            affichage de la liste des postes
+            </summary>
+            <param name="searchString">filtre par valeur recherchée</param>
+            <param name="page">page selectionnée dans l'affichage</param>
+            <param name="Contract">id du contrat selectionné</param>
+            <returns>liste des postes</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.SelectPosteWizard(System.Nullable{System.Int32},System.Int32,System.Int32)">
+            <summary>
+            affiche la première page d'entrée de données
+            </summary>
+            <param name="id">id du poste selectionné</param>
+            <param name="Contract">id du contrat</param>
+            <param name="poste">numéro du poste</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.BLControl(System.Int32,System.Int32)">
+            <summary>
+            contrôle de la valeur du champs BL ref
+            </summary>
+            <param name="BLRef"></param>
+            <param name="Contract"></param>
+            <returns>résultat du contrôle:ViewBag.message avec la valeur "OK" ou avec la valeur "At least one reception on this" si NOK</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.BLDateControl(System.String)">
+            <summary>
+            contrôle de la valeur Reception Date
+            </summary>
+            <param name="BLDate"></param>
+            <returns>résultat du contrôle:ViewBag.message avec la valeur "OK" ou avec la valeur "Must be between now and -14 days" si NOK</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.CertifControl(System.Int32)">
+            <summary>
+            contrôle de la valeur Certificate Number
+            </summary>
+            <param name="Certif"></param>
+            <returns>résultat du contrôle:ViewBag.message avec la valeur "OK" ou avec la valeur "Already in base" si NOK</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.FabControl(System.String)">
+            <summary>
+            contrôle de la valeur Fabrication date
+            </summary>
+            <param name="Fabdate"></param>
+            <returns>résultat du contrôle:ViewBag.message avec la valeur "OK" ou avec la valeur "Can't be in future" si NOK</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.ExpControl(System.String)">
+            <summary>
+            Contrôle la valeur Expiration date
+            </summary>
+            <param name="Expdate"></param>
+            <returns>résultat du contrôle:ViewBag.message avec la valeur "OK" ou avec la valeur "Can't be past date" si NOK</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.SelectGazWizard(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            affichage de la liste des gaz composant le poste
+            </summary>
+            <param name="idcontract"></param>
+            <param name="idShippingRequest"></param>
+            <param name="idposte"></param>
+            <param name="poste"></param>
+            <param name="Blref"></param>
+            <param name="BLDate"></param>
+            <param name="Certif"></param>
+            <param name="fabdate"></param>
+            <param name="expdate"></param>
+            <returns>retourne la vue</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.Controlgaz(System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            Contrôle de la valeur certificate value pour le gaz selectionné
+            </summary>
+            <param name="certifvalue"></param>
+            <param name="normalvalue"></param>
+            <param name="tol">tolerance</param>
+            <param name="idgaz"></param>
+            <returns>résultat du contrôle:ViewBag.message avec la valeur "OK" si la valeur est dans la marge de tolerance ou avec la valeur "Out of range" si NOK</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.Recapdata(System.String,System.Int32,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Affichage de la page d'entrée des données suivantes et récapitulatif des données compilées precedemment dans le wizard
+            </summary>
+            <param name="ManNumber">Reference fabriquant de la bouteille</param>
+            <param name="idShippingRequest"></param>
+            <param name="ContiNumber">Reference Continentale de la bouteille</param>
+            <param name="idcontract"></param>
+            <param name="contractnumber"></param>
+            <param name="provider"></param>
+            <param name="poste"></param>
+            <returns>retroune la vue</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.SaveData">
+            <summary>
+            sauvegarde des données
+            </summary>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.SendMail">
+            <summary>
+            generation du mail de reception
+            </summary>
+            <returns>rien: l'envoi se fait par la fonction en jquery mais on doit obligatoirement avoir une fonction correspondante dans le back</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.RemoveBottleInfo(System.String)">
+            <summary>
+            recherche de la ref bouteille 
+            </summary>
+            <param name="bottleNumber"></param>
+            <returns> rien si la bouteille existe et en état stock, "Unknow" si elle est introuvable</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.ValidDestock(System.String)">
+            <summary>
+            Validation du destockage d'une bouteille
+            </summary>
+            <param name="contiBottleNumber"></param>
+            <returns>génération du mail</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.BottleReceptionWizard.BottleReceptionWizardController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Controllers.Bottles.BottleController">
+            <summary>
+            Controleur d'administration des bouteilles
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Bottles.BottleController.Index(System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            retourne la liste de toutes les bouteilles enregistrés dans la base
+            </summary>
+            <param name="sortOrder">retour du filtre selectionné dans le front (X.PagedList)</param>
+            <param name="currentFilter">retour du filtre courant dans le front (X.PagedList)</param>
+            <param name="searchString">retour de la valeur à chercher selectionnée dans le front (X.PagedList)</param>
+            <param name="page">retour du numéro de page selectionné dans le front (X.PagedList)</param>
+            <returns>liste de toutes les bouteilles filtrées en fonction des paramètres précédents</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Bottles.BottleController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Affichage des details de la bouteille selectionnée
+            </summary>
+            <param name="id">id de la bouteille selectionnée</param>
+            <returns>vue details</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Bottles.BottleController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la vue suppression de la bouteille selectionnée
+            </summary>
+            <param name="id">id de la bouteille selectionnée</param>
+            <returns>vue suppression</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Bottles.BottleController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Validation de la suppression de la bouteille selectionnée
+            </summary>
+            <param name="id">id de la bouteille selectionnée</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Bottles.BottleController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Controllers.Contratcs.ContractsController">
+            <summary>
+            Controleur d'administration des Contrats
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Contratcs.ContractsController.Index(System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            retourne la liste de tous les contrats enregistrés dans la base
+            </summary>
+            <param name="sortOrder">retour du filtre selectionné dans le front (PagedList)</param>
+            <param name="currentFilter">retour du filtre courant dans le front (PagedList)</param>
+            <param name="searchString">retour de la valeur à chercher selectionnée dans le front (X.PagedList)</param>
+            <param name="page">retour du numéro de page selectionné dans le front (PagedList)</param>
+            <returns>liste de tous les contrats filtrées en fonction des paramètres précédents</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Contratcs.ContractsController.Details(System.Nullable{System.Int32})">
+            <summary>
+             Affichage des details du contrate selectionné
+            </summary>
+            <param name="id">id du contrat sélectionné</param>
+            <returns>vue details</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Contratcs.ContractsController.Create">
+            <summary>
+            Affichage de la vue suppression du contrat selectionné
+            </summary>
+            <returns>vue d'entrée des données du nouveau contrat</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Contratcs.ContractsController.Create(SpanGazV2.Models.tbl_607_order)">
+            <summary>
+            Binding des données de création du nouveau contrat
+            </summary>
+            <param name="tbl_607_order">datas</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Contratcs.ContractsController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            affiche la page d'édition d'un contrat
+            </summary>
+            <param name="id">id du contrat séléctionné</param>
+            <returns>vue d'édition</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Contratcs.ContractsController.Edit(SpanGazV2.Models.tbl_607_order)">
+            <summary>
+            Binding des données d'édition du contrat
+            </summary>
+            <param name="tbl_607_order">datas</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Contratcs.ContractsController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Suppression d'un contrat
+            </summary>
+            <param name="id">id du contrat sélectionné</param>
+            <returns>vue suppression</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Contratcs.ContractsController.DeleteConfirmed(System.Int32)">
+            <summary>
+            confirmation de la suppression
+            </summary>
+            <param name="id">>id de l'acteur à supprimer</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Contratcs.ContractsController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Controllers.Deliveries.DeliveriesController">
+            <summary>
+            Controleur d'administration des livraisons
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Deliveries.DeliveriesController.Index(System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            retourne la liste de toutes les livraisons enregistrées dans la base
+            </summary>
+            <param name="sortOrder">retour du filtre selectionné dans le front (X.PagedList)</param>
+            <param name="currentFilter">retour du filtre courant dans le front (X.PagedList)</param>
+            <param name="searchString">retour de la valeur à chercher selectionnée dans le front (X.PagedList)</param>
+            <param name="page">retour du numéro de page selectionné dans le front (X.PagedList)</param>
+            <returns>liste de toutes les livraisons filtrées en fonction des paramètres précédents</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Deliveries.DeliveriesController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la page Détails de la livraison séléctionnée
+            </summary>
+            <param name="id">id de la livraison selectionnée</param>
+            <returns>retourne les données correspondantes</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Deliveries.DeliveriesController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            affiche la page d'édition d'une livraison
+            </summary>
+            <param name="id">id de la livraison sélectionnée</param>
+            <returns>vue d'édition</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Deliveries.DeliveriesController.GetShippingRequest(System.Int32)">
+            <summary>
+            obtention des détails de la demande de livraison rattachée sur la vue d'édition
+            </summary>
+            <param name="IDShippingRequest">id de la demande de livraison</param>
+            <returns>ref de la demande et nom/prénom du demandeur</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Deliveries.DeliveriesController.Edit(SpanGazV2.Models.tbl_607_shipping_delivery)">
+            <summary>
+            validation des données d'édition
+            </summary>
+            <param name="tbl_607_shipping_delivery">data</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Deliveries.DeliveriesController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Suppression d'une livraison
+            </summary>
+            <param name="id">id de la livraison selectionnée</param>
+            <returns>vue suppression</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Deliveries.DeliveriesController.DeleteConfirmed(System.Int32)">
+            <summary>
+            confirmation de la suppression
+            </summary>
+            <param name="id">>id de la livraison à supprimer</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Deliveries.DeliveriesController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Controllers.GazReportingWizard.GazReportingWizardController">
+            <summary>
+            Controleur Wizard de controle des pressions de Gaz
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.GazReportingWizard.GazReportingWizardController.Index">
+            <summary>
+            Affichage du DropDownList des bancs de tests
+            </summary>
+            <returns>Vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.GazReportingWizard.GazReportingWizardController.GetProcess(System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="Process">id dans la table location -> id= 1 BM ; id= 5 BR</param>
+            <returns>affichage des vignettes bouteilles</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.GazReportingWizard.GazReportingWizardController.NewReport(System.Int32,System.Int32,System.Nullable{System.Int32},System.Int32,System.DateTime)">
+            <summary>
+            Controle de la nouvelle pression et de la date de peremption pour affichage dynamique
+            </summary>
+            <param name="reportvalue">valeur relevée à l'instant</param>
+            <param name="continumber">Numéro Conti de la bouteille</param>
+            <param name="lastpressure">Pression précédente</param>
+            <param name="process">id dans la table location -> id= 1 BM ; id= 5 BR</param>
+            <param name="expiration_date">date d'expiration</param>
+            <returns>affichage dynamique: vert si OK, Orange si Warning, Rouge si NOK</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.GazReportingWizard.GazReportingWizardController.searchNewBottle(System.String)">
+            <summary>
+            recherche d'une bouteille de remplacement
+            </summary>
+            <param name="contiBottleNumber">Numéro Conti de la bouteille à remplacer</param>
+            <returns>numéro de la bouteille ayant le même contenu et ayant la date de péremption la plus proche</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.GazReportingWizard.GazReportingWizardController.saveNewBottle(System.String)">
+            <summary>
+            Déstockage de la bouteille usagée et enregistrement de la mise en service de la nouvelle
+            </summary>
+            <param name="oldBottleNumber">numéro de la bouteille usagée</param>
+            <returns>génération du mail informant de la dépose de l'ancienne bouteille</returns>
+        </member>
+        <member name="T:SpanGazV2.Controllers.Gaz.GazController">
+            <summary>
+            Controleur d'administration des Gaz
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Gaz.GazController.Index">
+            <summary>
+             retourne la liste de tous les contrats
+            </summary>
+            <returns>dropdownlist des contrats</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Gaz.GazController.GetPostes(System.Int32)">
+            <summary>
+            Selection du poste
+            </summary>
+            <param name="IDOrderNumber">id du contrat sélectionné</param>
+            <returns>vue partielle postes</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Gaz.GazController.GetPosteDetails(System.Int32)">
+            <summary>
+            Affichage de la liste des gaz sur le poste sélectionné
+            </summary>
+            <param name="IDPosteNumber">id du poste sélectionné</param>
+            <returns>liste des gaz</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Gaz.GazController.Create(System.Int32)">
+            <summary>
+            affiche la page de création d'un Gaz
+            </summary>
+            <param name="IDPosteNumber">id du poste qui va contenir le Gaz</param>
+            <returns>retourne la vue Création</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Gaz.GazController.Create(SpanGazV2.Models.tbl_607_gaz,System.Int32)">
+            <summary>
+            Création du Gaz, Binding des données
+            </summary>
+            <param name="tbl_607_gaz">data</param>
+            <param name="IDPosteNumber">id du poste qui va contenir le Gaz</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Gaz.GazController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la vue Suppression
+            </summary>
+            <param name="id">id du Gaz sélectionné</param>
+            <returns>Vue Suppression</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Gaz.GazController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Suppression du Gaz sélectionné
+            </summary>
+            <param name="id">id du Gaz sélectionné</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Gaz.GazController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Controllers.Login.LoginController">
+            <summary>
+            Controleur de controle d'acces à l'application
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Login.LoginController.Index(System.String)">
+            <summary>
+            Affichage de la page de login
+            </summary>
+            <param name="user">récupération des identifiants de la session Windows et du nom de domaine</param>
+            <returns>Si l'utilisateur est présent dans la table actors on affiche la page d'accueil, sinon on affiche une erreur</returns>
+        </member>
+        <member name="T:SpanGazV2.Controllers.ErrorPages.OoopsController">
+            <summary>
+            Gestion des erreurs
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.ErrorPages.OoopsController.Index(System.String)">
+            <summary>
+            affichage de la page d'erreur
+            </summary>
+            <param name="message">message retourné par le controleur qui lève l'exception</param>
+            <returns>vue erreur et message</returns>
+        </member>
+        <member name="T:SpanGazV2.Controllers.HomeController">
+            <summary>
+            Controleur de démarrage
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomeController.Index">
+            <summary>
+            Index
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SpanGazV2.Controllers.HomePage.HomePageController">
+            <summary>
+            Controleur de la page d'accueil
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomePage.HomePageController.Index">
+            <summary>
+            Affichage du NewsFeeder
+            </summary>
+            <returns>Affichage des commentaires</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomePage.HomePageController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Affichage des détails du commentaire sélectionné
+            </summary>
+            <param name="id">id du commentaire sélectionné</param>
+            <returns>vue détails</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomePage.HomePageController.Create">
+            <summary>
+            Affichage de la vue création d'un commentaire
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomePage.HomePageController.Create(SpanGazV2.Models.tbl_607_comments)">
+            <summary>
+            Binding des données du nouveau commentaire
+            </summary>
+            <param name="tbl_607_comments">data</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomePage.HomePageController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la vue d'édition
+            </summary>
+            <param name="id">id du commentaire sélectionné</param>
+            <returns>vue édition</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomePage.HomePageController.Edit(SpanGazV2.Models.tbl_607_comments)">
+            <summary>
+            Binding des données du commentaire modifié
+            </summary>
+            <param name="id">id du commentaire sélectionné</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomePage.HomePageController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la vue de suppression
+            </summary>
+            <param name="id">id du commentaire sélectionné</param>
+            <returns>vue suppression</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomePage.HomePageController.DeleteConfirmed(System.Int32)">
+            <summary>
+            validation de la suppression
+            </summary>
+            <param name="id">id du commentaire à supprimer</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.HomePage.HomePageController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Controllers.Orders.OrdersController">
+            <summary>
+            Controleur d'administration des commandes
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Orders.OrdersController.Index(System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            retourne la liste de toutes les commandes enregistrées dans la base
+            </summary>
+            <param name="sortOrder">retour du filtre selectionné dans le front (X.PagedList)</param>
+            <param name="currentFilter">retour du filtre courant dans le front (X.PagedList)</param>
+            <param name="searchString">retour de la valeur à chercher selectionnée dans le front (X.PagedList)</param>
+            <param name="page">retour du numéro de page selectionné dans le front (X.PagedList)</param>
+            <returns>liste de toutes les commandes filtrés en fonction des paramètres précédents</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Orders.OrdersController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la page détails de la commande sélectionnée
+            </summary>
+            <param name="id">id de la commande sélectionnée</param>
+            <returns>vue détails</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Orders.OrdersController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la vue d'édition d'une commande
+            </summary>
+            <param name="id">id de la commande sélectionnée</param>
+            <returns>vue d'édition</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Orders.OrdersController.Edit(SpanGazV2.Models.tbl_607_shipping_request)">
+            <summary>
+            Binding des données éditées
+            </summary>
+            <param name="tbl_607_shipping_request">data</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Orders.OrdersController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la vue de suppression d'une commande
+            </summary>
+            <param name="id">id de la commande sélectionnée</param>
+            <returns>vue suppression</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Orders.OrdersController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Suppression de la commande sélectionnée
+            </summary>
+            <param name="id">id de la commande sélectionnée</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Orders.OrdersController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Controllers.OrderWizard.OrderWizardController">
+            <summary>
+            Controleur du wizard de commande
+            </summary>
+        </member>
+        <member name="F:SpanGazV2.Controllers.OrderWizard.OrderWizardController.partialSave">
+            <summary>
+            Dictionnaire pour l'enregistrement du panier
+            </summary>
+        </member>
+        <member name="F:SpanGazV2.Controllers.OrderWizard.OrderWizardController.contractNumber">
+            <summary>
+            Numéro du contrat en cours
+            </summary>
+        </member>
+        <member name="F:SpanGazV2.Controllers.OrderWizard.OrderWizardController.sr_ref">
+            <summary>
+            Référence unique de la commande
+            </summary>
+        </member>
+        <member name="F:SpanGazV2.Controllers.OrderWizard.OrderWizardController.fileName">
+            <summary>
+            Chemin et nom du fichier pour la génération du bon de commande
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.OrderWizard.OrderWizardController.Index">
+            <summary>
+            Affichage d'une DropDownList pour le choix du contrat
+            </summary>
+            <returns>liste des contrats</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.OrderWizard.OrderWizardController.GetContract(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la liste des postes 
+            </summary>
+            <param name="contract">numéro de contrat</param>
+            <param name="searchString">retour de la valeur à chercher selectionnée dans le front (X.PagedList)</param>
+            <param name="page">retour du numéro de page selectionné dans le front (X.PagedList)</param>
+            <returns>Liste des postes du contrat qui contiennent des Gaz</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.OrderWizard.OrderWizardController.Savepartial(System.Int32,System.Int32)">
+            <summary>
+            Sauvegarde dans le dictionnaire de la ligne de commande validée
+            </summary>
+            <param name="posteid">numéro du poste stocké dans le champ key</param>
+            <param name="quantity">quantité stockée dans le champ value</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.OrderWizard.OrderWizardController.RemovePartial(System.Int32)">
+            <summary>
+            Suppression d'une ligne de commande dans le dictionnaire
+            </summary>
+            <param name="posteid">numéro du poste de la ligne à rechercher dans le champ key</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.OrderWizard.OrderWizardController.SaveAll(System.String)">
+            <summary>
+            Validation du panier
+            </summary>
+            <param name="contract">numéro de contrat</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.OrderWizard.OrderWizardController.GenerateDocument">
+            <summary>
+            Génération du bon de comande
+            </summary>
+            <returns>Fichier à télécharger, celui-ci est également stocké sur le serveur</returns>
+        </member>
+        <member name="T:SpanGazV2.Controllers.Postes.PostesController">
+            <summary>
+            Controleur d'administration des postes
+            </summary>
+        </member>
+        <member name="F:SpanGazV2.Controllers.Postes.PostesController.IDContract">
+            <summary>
+            Variable static pour stockage du numéro de contrat selectionné
+            </summary>
+        </member>
+        <member name="F:SpanGazV2.Controllers.Postes.PostesController.IDPoste">
+            <summary>
+            Variable static pour stockage du numéro de poste avant edition
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.Index">
+            <summary>
+            Affichage du DropDownList listant les contrats
+            </summary>
+            <returns>liste des contrats</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.GetPostes(System.String,System.Nullable{System.Int32},System.Int32)">
+            <summary>
+            retourne la liste des postes
+            </summary>
+            <param name="searchString">retour de la valeur à chercher selectionnée dans le front (X.PagedList)</param>
+            <param name="page">retour du numéro de page selectionné dans le front (X.PagedList)</param>
+            <param name="IDContractNumber">numéro du contrat sélectionné</param>
+            <returns>liste de tous les postes filtrés en fonction des paramètres précédents</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.PosteNumberControl(System.Int32)">
+            <summary>
+            Contrôle de l'existance d'un poste sur le contrat selectionné pour empécher la duplication lors de la création
+            </summary>
+            <param name="posteNumber">numéro du poste sélectionné</param>
+            <returns>message qui sera traité par le javascript</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Affichage des détails du poste sélectionné
+            </summary>
+            <param name="id">id du poste sélectionné</param>
+            <returns>vue détails</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.Create">
+            <summary>
+            Vue création d'un poste
+            </summary>
+            <returns>vue création</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.Create(SpanGazV2.Models.tbl_607_order_details)">
+            <summary>
+            Binding des données pour création du poste
+            </summary>
+            <param name="tbl_607_order_details">data</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.PosteEditNumberControl(System.Int32)">
+            <summary>
+            Contrôle de l'existance d'un poste sur le contrat selectionné pour empécher la duplication lors de l'édition
+            </summary>
+            <param name="posteNumber">numéro de poste</param>
+            <returns>message qui sera traité par le javascript</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Vue d'édition d'un poste
+            </summary>
+            <param name="id">id du poste sélectionné</param>
+            <returns>vue d'édition</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.Edit(SpanGazV2.Models.tbl_607_order_details)">
+            <summary>
+            Binding des données modifiées sur le poste
+            </summary>
+            <param name="tbl_607_order_details">data</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Vue suppression d'un poste
+            </summary>
+            <param name="id">id du poste sélectionné</param>
+            <returns>vue suppression</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Validation de la suppression
+            </summary>
+            <param name="id">id du poste sélectionné</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Postes.PostesController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Controllers.Providers.ProvidersController">
+            <summary>
+            Controleur d'administration des fournisseurs
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Providers.ProvidersController.Index(System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            retourne la liste de tous les fournisseurs enregistrés dans la base
+            </summary>
+            <param name="sortOrder">retour du filtre selectionné dans le front (X.PagedList)</param>
+            <param name="currentFilter">retour du filtre courant dans le front (X.PagedList)</param>
+            <param name="searchString">retour de la valeur à chercher selectionnée dans le front (X.PagedList)</param>
+            <param name="page">retour du numéro de page selectionné dans le front (X.PagedList)</param>
+            <returns>liste de tous les fournisseurs filtrés en fonction des paramètres précédents</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Providers.ProvidersController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Affichage de la page Détails du fournisseur séléctionné
+            </summary>
+            <param name="id">id du fournisseur selectionné</param>
+            <returns>retourne les données correspondantes</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Providers.ProvidersController.Create">
+            <summary>
+            affiche la page de création d'un nouveau fournisseur
+            </summary>
+            <returns>retourne la vue</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Providers.ProvidersController.Create(SpanGazV2.Models.tbl_607_provider)">
+            <summary>
+            Binding des données du nouveau fournisseur
+            </summary>
+            <param name="tbl_607_provider">data</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Providers.ProvidersController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            affiche la page d'édition d'un fournisseur
+            </summary>
+            <param name="id">id du fournisseur selectionné</param>
+            <returns>vue edition</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Providers.ProvidersController.Edit(SpanGazV2.Models.tbl_607_provider)">
+            <summary>
+            validation des modification sur le fournisseur
+            </summary>
+            <param name="tbl_607_provider">data</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Providers.ProvidersController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Suppression d'un fournisseur
+            </summary>
+            <param name="id">id du fournisseur sélectionné</param>
+            <returns>vue suppression</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Providers.ProvidersController.DeleteConfirmed(System.Int32)">
+            <summary>
+            confirmation de la suppression
+            </summary>
+            <param name="id">>id du fournisseurr à supprimer</param>
+            <returns>vue principale</returns>
+        </member>
+        <member name="M:SpanGazV2.Controllers.Providers.ProvidersController.Dispose(System.Boolean)">
+            <summary>
+            Libère les ressources non managées utilisées par Control et ses contrôles enfants et libère éventuellement les ressources managées.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:SpanGazV2.Models.BottlereceptionWizardViewModelTemp">
+            <summary>
+            Modèle de stockage temporaire des données du Wizard de réception d'une bouteille
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.idcontract">
+            <summary>
+            id du contrat
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.posteNumber">
+            <summary>
+            numéro de poste
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.BL_ref">
+            <summary>
+            Référence du BL
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.reception_date">
+            <summary>
+            Date de réception
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.conformity_certificate">
+            <summary>
+            numéro du certificat de conformité
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.fabrication_date">
+            <summary>
+            date de fabrication
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.expiration_date">
+            <summary>
+            date d'expiration
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.reception_quantity">
+            <summary>
+            quantité restant à recevoir
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.recieved_quantity">
+            <summary>
+            quantité reçue
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.gaz_id">
+            <summary>
+            id Gaz
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.real_content">
+            <summary>
+            concentration réelle
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.manufacturer_bottle_number">
+            <summary>
+            numéro fabriquant de la bouteille
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.bottle_conti_number">
+            <summary>
+            numéro conti de la bouteille
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.bottle_location">
+            <summary>
+            localistaion de la bouteille
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.FK_ID_shipping_request">
+            <summary>
+            clef étrangère de la demande de la demande de livraison
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.BottlereceptionWizardViewModelTemp.content">
+            <summary>
+            commentaires sur le contenu
+            </summary>
+        </member>
+        <member name="T:SpanGazV2.Models.ContractListOrderWizard">
+            <summary>
+            Modèle pour l'affichage d'une liste combinée dans le wizard de commande de bouteilles
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.ContractListOrderWizard.Contract">
+            <summary>
+            Numéro de contrat
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.ContractListOrderWizard.Provider">
+            <summary>
+            Nom du fournisseur
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.ContractListOrderWizard.Start_Date">
+            <summary>
+            Date de début de contrat
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.ContractListOrderWizard.End_Date">
+            <summary>
+            Date de fin de contart
+            </summary>
+        </member>
+        <member name="M:SpanGazV2.Models.ContractListOrderWizard.ToString">
+            <summary>
+            Override de la méthode ToString sur la classe pour la génération du champ combiné
+            </summary>
+            <returns></returns>        
+        </member>
+        <member name="T:SpanGazV2.Models.DestockBottleInfos">
+            <summary>
+            Modèle temporaire pour le stockage des données combinées de plusieurs tables et l'affichage de celles-ci dans la vue
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.contiNumber">
+            <summary>
+            Numéro Conti de la bouteille
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.manufacturerNumber">
+            <summary>
+            Numéro fabricant de la bouteille
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.bottleLocation">
+            <summary>
+            Localisation de la bouteille
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.fabricationDate">
+            <summary>
+            date de fabrication
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.expirationDate">
+            <summary>
+            date d'expiration
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.receptionDate">
+            <summary>
+            date de reception
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.posteNumber">
+            <summary>
+            numéro de poste
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.contractNumber">
+            <summary>
+            numéro du contrat
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.gazType">
+            <summary>
+            gaz type
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.DestockBottleInfos.theoricalContent">
+            <summary>
+            concentration théorique
+            </summary>
+        </member>
+        <member name="T:SpanGazV2.Models.GazReportingWizardViewModel">
+            <summary>
+            Modèle temporaire pour le stockage des informations qui seront affichées dans le wizard GazReporting
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.GazReportingWizardViewModel.bottle_conti_number">
+            <summary>
+            Numéro conti de la bouteille
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.GazReportingWizardViewModel.pressure_value">
+            <summary>
+            pression relevée
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.GazReportingWizardViewModel.reporting_date">
+            <summary>
+            date de relève
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.GazReportingWizardViewModel.first_name">
+            <summary>
+            prénom du technicien
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.GazReportingWizardViewModel.last_name">
+            <summary>
+            nom du technicien
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.GazReportingWizardViewModel.expiration_date">
+            <summary>
+            date d'expiration
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.GazReportingWizardViewModel.content">
+            <summary>
+            contenu
+            </summary>
+        </member>
+        <member name="T:SpanGazV2.Models.OrderWizardTemp">
+            <summary>
+            modèle temporaire pour l'affichage de la quantité dans le panier
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardTemp.quantity">
+            <summary>
+            quantité
+            </summary>
+        </member>
+        <member name="T:SpanGazV2.Models.OrderWizardViewModel">
+            <summary>
+            Modèle temporaire pour l'affichage des données des postes récupérées sur plusieurs tables
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardViewModel.posteNumber">
+            <summary>
+            numéro du poste
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardViewModel.contractQ">
+            <summary>
+            quantité au contrat
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardViewModel.recievedQ">
+            <summary>
+            quantité reçue
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardViewModel.onTheRoadQ">
+            <summary>
+            quantité en cours de livraison
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardViewModel.lifeTime">
+            <summary>
+            Durée de vie
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardViewModel.stockMini">
+            <summary>
+            Stock minimum
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardViewModel.shippingDelay">
+            <summary>
+            délai de livraison
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardViewModel.idPoste">
+            <summary>
+            id du poste
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Models.OrderWizardViewModel.content">
+            <summary>
+            contenu
+            </summary>
+        </member>
+        <member name="T:SpanGazV2.Properties.Resources">
+            <summary>
+              Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Properties.Resources.ResourceManager">
+            <summary>
+              Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
+            </summary>
+        </member>
+        <member name="P:SpanGazV2.Properties.Resources.Culture">
+            <summary>
+              Remplace la propriété CurrentUICulture du thread actuel pour toutes
+              les recherches de ressources à l'aide de cette classe de ressource fortement typée.
+            </summary>
+        </member>
+    </members>
+</doc>

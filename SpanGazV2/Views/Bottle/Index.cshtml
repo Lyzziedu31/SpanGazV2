@@ -1,0 +1,89 @@
+﻿@model PagedList.IPagedList<SpanGazV2.Models.tbl_607_bottle>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <h2 style="color:#ffbe2e">Bottle administration</h2>
+
+@using (Html.BeginForm())
+{
+    <p style="color:#ffbe2e">
+        Find: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped">
+        <tr>
+            <th scope="col">
+                @Html.ActionLink("Manufacturer number", "Index", new { sortOrder = ViewBag.Manufacturer_NumberSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                @Html.ActionLink("Continental number", "Index", new { sortOrder = ViewBag.Conti_NumberSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                @Html.ActionLink("Order number", "Index", new { sortOrder = ViewBag.ContentSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                @Html.ActionLink("Conformity certificate", "Index", new { sortOrder = ViewBag.ConformityCertifSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                @Html.ActionLink("Location", "Index", new { sortOrder = ViewBag.BottleLocationSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                @Html.ActionLink("BL Ref", "Index", new { sortOrder = ViewBag.BLRefSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                Reception date
+            </th>
+            <th scope="col">
+                Expiration date
+            </th>
+            <th scope="col">
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.manufacturer_bottle_number)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.bottle_conti_number)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_order.order_number)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_conformity_certificate.ID)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_location.bottle_location)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_shipping_delivery.BL_ref)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_shipping_delivery.reception_date)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_conformity_certificate.expiration_date)
+                </td>
+                <td scope="col">
+                    <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Details", new { id = item.ID })'">Details</button> |
+                    <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.ID })'">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<p >
+    <a style="color:#ffbe2e">@Html.PagedListPager(Model, page => Url.Action("Index",new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))</a>
+</p>

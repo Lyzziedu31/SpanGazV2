@@ -1,0 +1,68 @@
+﻿@model PagedList.IPagedList<SpanGazV2.Models.tbl_607_actors>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Actors";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="color:#ffbe2e">Actors administration</h2>
+
+
+@using (Html.BeginForm())
+{
+<p style="color:#ffbe2e">
+    Find: @Html.TextBox("SearchString")
+    <input type="submit" value="Search" />
+</p>
+}
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped table-sm">
+        <tr>
+            <th scope="col">
+                @Html.ActionLink("id_uid", "Index", new { sortOrder = ViewBag.UIDSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                First Name
+            </th>
+            <th scope="col">
+                @Html.ActionLink("last_name", "Index", new { sortOrder = ViewBag.Last_NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                Role
+            </th>
+            <th scope="col">
+                <button class="btn btn-success btn-outline-dark" onclick="location.href='@Url.Action("Create")'">Create</button>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.id_uid)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.first_name)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.last_name)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.role)
+                </td>
+                <td scope="col">
+                    <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Edit", new { id = item.id })'">Edit</button> |
+                    <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Details", new { id = item.id })'">Details</button> |
+                    <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.id })'">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+    
+    <div style="color:#ffbe2e">
+    @Html.PagedListPager(Model, page => Url.Action("Index",new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>

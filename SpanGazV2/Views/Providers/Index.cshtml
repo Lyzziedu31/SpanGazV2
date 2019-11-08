@@ -1,0 +1,148 @@
+﻿@model PagedList.IPagedList<SpanGazV2.Models.tbl_607_provider>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="color:#ffbe2e">Providers administration</h2>
+
+@using (Html.BeginForm())
+{
+    <p style="color:#ffbe2e">
+        Find: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped table-sm">
+        <tr>
+            <th scope="col">
+                @Html.ActionLink("Provider's name", "index", new { sortOrder = ViewBag.Provider_NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                Adress
+            </th>
+            <th scope="col">
+                Adress 2
+            </th>
+            <th scope="col">
+                Postal Code
+            </th>
+            <th scope="col">
+                Town
+            </th>
+            <th scope="col">
+                Phone
+            </th>
+            <th scope="col">
+                Fax
+            </th>
+            <th scope="col">
+                E-Mail
+            </th>
+            <th scope="col">
+                <button class="btn btn-success btn-outline-dark" onclick="location.href='@Url.Action("Create")'">Create</button>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.provider_name)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.adress)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.adress_compl)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.cp)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.town)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.phone)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.fax)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.mail)
+                </td>
+                <td scope="col">
+                    <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Edit", new { id = item.ID })'">Edit</button> |
+                    <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Details", new { id = item.ID })'">Details</button> |
+                    <button type="button" class="btn btn-danger" onclick="Delete(id = @item.ID)">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<p style="color:#ffbe2e">
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</p>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="BottleSelect"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="alert alert-danger" id="alertMessage" style="margin:5%" role="alert">
+                        There is at least one contract on this one: deleting forbidden
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+    function Delete(id) {
+        console.log(id);
+        $.ajax({
+            url: '@Url.Action("Delete")',
+            dataType: "html",
+            data: { "id": id },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                if (response.trim() == "Forbidden") {
+                    console.log(response.trim());
+                    $('#Modal').modal('show');
+                }
+                else {
+                    console.log(response.trim());
+                }
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+        }
+    </script>
+}

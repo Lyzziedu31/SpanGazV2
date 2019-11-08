@@ -1,0 +1,93 @@
+.col-grey {
+    background-color: #343a40;
+}
+
+
+.btn-sq-lg {
+    width: 325px !important;
+    height: 75px !important;
+}
+
+.btn-sq {
+    width: 325px !important;
+    height: 75px !important;
+    font-size: 10px;
+}
+
+.btn-sq-sm {
+    width: 325px !important;
+    height: 75px !important;
+    font-size: 10px;
+}
+
+.btn-sq-xs {
+    width: 325px !important;
+    height: 75px !important;
+    padding: 2px;
+}
+
+.btn-admin-menu {
+    width: 325px !important;
+    height: 75px !important;
+}
+.providerTile {
+    background: url("../Content/ressources/adminMenuTile.jpg");
+}
+.contractsTile {
+    background: url("../Content/ressources/adminMenuTile.jpg");
+}
+.contractsDetailsTile {
+    background: url("../Content/ressources/adminMenuTile.jpg");
+}
+.gazTile {
+    background: url("../Content/ressources/adminMenuTile.jpg");
+}
+.bottleTile {
+    background: url("../Content/ressources/adminMenuTile.jpg");
+}
+.actorTile {
+    background: url("../Content/ressources/adminMenuTile.jpg");
+}
+.orderTile {
+    background: url("../Content/ressources/adminMenuTile.jpg");
+}
+.deliveryTile {
+    background: url("../Content/ressources/adminMenuTile.jpg");
+}
+
+.providerTile, .contractsTile, .contractsDetailsTile, .gazTile, .bottleTile, .actorTile, .orderTile, .deliveryTile {
+    background-size: cover;
+    position: relative;
+}
+
+
+.providerTile:hover .overlay-effect, .contractsTile:hover .overlay-effect, .contractsDetailsTile:hover .overlay-effect, .gazTile:hover .overlay-effect,.bottleTile:hover .overlay-effect, .actorTile:hover .overlay-effect, .orderTile:hover .overlay-effect, .deliveryTile:hover .overlay-effect {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.overlay-effect {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: rgba(255,190,46, 0.51);
+    overflow: hidden;
+}
+.texttiles
+{
+    color: #ffbe2e;
+    font-weight: bold;
+    font-size: xx-large;
+    margin-left: 7%;
+}
+.texttiles-fontblack
+{
+    color: #ffbe2e;
+    font-weight: bold;
+    font-size: xx-large;
+    margin-left: 7%;
+}

@@ -1,0 +1,155 @@
+﻿@model SpanGazV2.Models.tbl_607_order_details
+
+@{
+    Layout = null;
+}
+
+
+    <div class="form-group">
+        <a style="color:#ffbe2e">Poste number</a>
+        <div>
+            @Html.DropDownListFor(model=> model.poste_number, (IEnumerable<SelectListItem>)ViewBag.FK_ID_order_details, "Select Poste", new { @class = "form-control", @style = "margin-left:15px", @id = "ddlPosteDetails", onchange = "return PosteDetails()" })
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+             
+    function PosteDetails() {
+        var posteDetails = document.getElementById("ddlPosteDetails").value;
+        if (posteDetails == 0) {
+            return false;
+            console.log("ici");
+        }
+        $.ajax({
+            url: '@Url.Action("GetPosteDetails")',
+            dataType: "html",
+            data: { "IDPosteNumber": posteDetails },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialGazByPoste').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+
+    function create()
+    {
+        console.log("test")
+        var posteDetails = document.getElementById("ddlPosteDetails").value;
+        if (posteDetails == 0) {
+            return false;
+            console.log(posteDetails);
+        }
+        $.ajax({
+            url: '@Url.Action("Create")',
+            dataType: "html",
+            data: { "IDPosteNumber": posteDetails },
+            type: "GET",
+            //contentType: "application/json",
+            success: function (response) {
+                $('#PartialGazByPoste').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+
+    @*function CreateAll()
+    {
+        console.log("test")
+        var IDGazType = document.getElementById("IDGazType").value;
+        console.log("IDGazType= " + IDGazType)
+        var IDPosteNumber = document.getElementById("IDPosteNumber").value;
+        console.log("IDPosteNumber= " + IDPosteNumber)
+        var IDTheoricalContent = document.getElementById("IDTheoricalContent").value;
+        console.log("IDTheoricalContent= " + IDTheoricalContent)
+        var IDTheoricalContentUnit = document.getElementById("IDTheoricalContentUnit").value;
+        console.log("IDTheoricalContentUnit= " + IDTheoricalContentUnit)
+        var IDMadeTolerance = document.getElementById("IDMadeTolerance").value;
+        console.log("IDMadeTolerance= " + IDMadeTolerance)
+        var IDMadeToleranceUnit = document.getElementById("IDMadeToleranceUnit").value;
+        console.log("IDMadeToleranceUnit= " + IDMadeToleranceUnit)
+        var IDTestingTolerance = document.getElementById("IDTestingTolerance").value;
+        console.log("IDTestingTolerance= " + IDTestingTolerance)
+        var IDTestingToleranceUnit = document.getElementById("IDTestingToleranceUnit").value;
+        console.log("IDTestingToleranceUnit= " + IDTestingToleranceUnit)     
+        
+        
+        if (IDPosteNumber == 0) {
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("NewGaz")',
+            dataType: "html",
+            data: {"IDGazType": IDGazType, "IDPosteNumber": IDPosteNumber, "IDTheoricalContent": IDTheoricalContent, "IDTheoricalContentUnit": IDTheoricalContentUnit,
+            "IDMadeTolerance" : IDMadeTolerance, "IDMadeToleranceUnit" : IDMadeToleranceUnit, "IDTestingTolerance" : IDTestingTolerance, "IDTestingToleranceUnit" : IDTestingToleranceUnit},
+            type: "POST",
+            //contentType: "application/json",
+            success: function (response) {
+                $('#PartialGazByPoste').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }*@
+
+    function edit(id)
+    {
+        console.log(id);
+
+        $.ajax({
+            url: '@Url.Action("Edit")',
+            dataType: "html",
+            data: { id: id },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialGazByPoste').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+
+    function details(id)
+    {
+        $.ajax({
+            url: '@Url.Action("Details")',
+            dataType: "html",
+            data: { id: id },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialGazByPoste').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+
+    function deleteitem(id)
+    {
+        $.ajax({
+            url: '@Url.Action("Delete")',
+            dataType: "html",
+            data: { id: id },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialGazByPoste').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+</script>
+

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SpanGazV2.Models.tbl_607_order>
+
+
+<button type="button" class="btn btn-dark btn-outline-light" style="margin-left: 15px">@Html.ActionLink("Back", "Index")</button>
+<div class="table-responsive">
+    <table class="table table-dark table-striped table-sm">
+        <tr>
+            <th scope="col">
+                <a style="color:#ffbe2e">Provider</a>
+            </th>
+            <th scope="col">
+                <a style="color:#ffbe2e">Contract Number</a>
+            </th>
+            <th scope="col">
+                <a style="color:#ffbe2e">Reception Authorized</a>
+            </th>
+            <th scope="col">
+                <a style="color:#ffbe2e">Start date</a>
+            </th>
+            <th scope="col">
+                <a style="color:#ffbe2e">End date</a>
+            </th>
+            <th>
+                <a style="color:#ffbe2e">Action</a>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_provider.provider_name)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.order_number)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.item_reception_active)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.start_date)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.end_date)
+                </td>
+                <td scope="col">
+                    <button type="button" class="btn btn-light" onclick="GetContract(@item.ID)">Select</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

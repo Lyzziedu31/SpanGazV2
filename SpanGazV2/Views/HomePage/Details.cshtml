@@ -1,0 +1,42 @@
+﻿@model SpanGazV2.Models.tbl_607_comments
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2 style="color:#ffbe2e">Comment details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <a style="color:#ffbe2e">@Html.DisplayNameFor(model => model.ID_UID)</a>
+        </dt>
+
+        <dd class="form-control">
+            @Html.DisplayFor(model => model.ID_UID)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">@Html.DisplayNameFor(model => model.Date)</a>
+        </dt>
+
+        <dd class="form-control">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">@Html.DisplayNameFor(model => model.Comment)</a>
+        </dt>
+
+        <dd class="form-control">
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <button type="button" class="btn btn-warning" style="margin-right: 5px">@Html.ActionLink("Edit", "Edit", new { id = Model.ID })</button> |
+        <button type="button" class="btn btn-danger" style="margin-left: 5px">@Html.ActionLink("Back to List", "Index")</button>
+</p>

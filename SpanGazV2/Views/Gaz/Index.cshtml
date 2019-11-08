@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SpanGazV2.Models.tbl_607_gaz>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="color:#ffbe2e">Gaz administration</h2>
+
+<div class="row">
+    <div class="col-md-2">
+        <a style="color:#ffbe2e">Contract number</a>
+        <div id="FK_ID_order_details">
+            @Html.DropDownList("Contracts", null, "Select Contract", htmlAttributes: new { @class = "form-control", @style = "margin-left:15px", @id = "ddlOrder", onchange = "return GetPostes()" })
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div id="PartialPostes">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="PartialGazByPoste" class="col-md-10">
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        function GetPostes() {
+            var order = document.getElementById("ddlOrder").value;
+            console.log(order);
+            if (order == 0) {
+                console.log("ici");
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("GetPostes")',
+                dataType: "html",
+                data: { "IDOrderNumber": order },
+                type: "GET",
+                contentType: "application/json",
+                success: function (response) {
+                    $('#PartialPostes').html(response);
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+    </script>
+}
+
+

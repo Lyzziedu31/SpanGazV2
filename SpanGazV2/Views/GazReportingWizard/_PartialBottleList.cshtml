@@ -1,0 +1,100 @@
+﻿@model IEnumerable<SpanGazV2.Models.GazReportingWizardViewModel>
+    <div class="row" style="padding:1%">
+        @{
+            ViewBag.dateNow = DateTime.Now.Date;
+            int cpt = 0;
+            foreach (var item in Model)
+            {
+
+                cpt++;
+                <div class="card  text-white bg-secondary col-md-12 col-sm-12 col-xl-2" style="margin-left:1%; margin-top:1%" id="card_@cpt">
+                    <div class="card-body">
+                        <h5 class="card-title">Bottle N° @Html.DisplayFor(modelItem => item.bottle_conti_number)</h5>
+                        <h6 class="card-subtitle mb-2">Content: @Html.DisplayFor(modelItem => item.content)</h6>
+                        <div class="">
+                            <div>
+                                Expiration date : <a id="exp_@cpt">@Html.DisplayFor(modelItem => item.expiration_date)</a>
+                            </div>
+                            <div>
+                                <a>Last report by @Html.DisplayFor(modelItem => item.first_name)</a>
+                            </div>
+                            <div>
+                                <a>Last report date @Html.DisplayFor(modelItem => item.reporting_date)</a>
+                            </div>
+                            <div>
+                                Last pressure <a id="lastpressure_@cpt">@Html.DisplayFor(modelItem => item.pressure_value)</a>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:2%; margin-left:1%">
+                            <input class="form-control col-6" id="reportvalue_@cpt" type="number" placeholder="Enter value" />
+                            <button class="btn btn-warning btn-outline-light col-5" style=" margin-left:5px" id="controlbtn_@cpt" onclick="NewReport(cpt = @cpt, bottleNumber = @item.bottle_conti_number)">Control</button>
+                        </div>
+                        <div class="row" style="margin-left:0px">
+                            <button id="btn_change_bottle_@cpt" class="btn btn-dark btn-outline-light" style="margin-top:2%" data-toggle="modal" data-target="#Modal_@cpt">Change bottle</button>
+                        </div>
+                        <div class="row" style="margin-left:0px">
+                            <a id="alerttext_@cpt"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="Modal_@cpt" tabindex="-1" role="dialog" aria-labelledby="BottleChangeProcess"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="processPopUp">Bottle change process</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Replace bottle <a style="color:red; font-weight:500">@Html.DisplayFor(modelItem => item.bottle_conti_number)</a></h5>
+                                <div class="row">
+                                    <h5 class="col-4" style="margin-top:2%">with bottle</h5>
+                                    <text id="newBottle_@cpt" class="form-control col-3" style="margin-top:0.5%; margin-left:-5%; color:forestgreen; font-weight:500"></text>
+                                    <button type="button" class="btn btn-success col-1" style="margin-left:2%" onclick="searchNewBottle(contiBottleNumber = @item.bottle_conti_number, cpt = @cpt)"><i class="fab fa-searchengin"></i></button>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="mailtobutton" style="visibility:hidden" type="button" class="btn btn-success" onclick="">Send eMail</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="saveNewBottle( oldBottleNumber = @item.bottle_conti_number, cpt = @cpt)">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                $(document).ready(function () {
+                    var expdate = new Date(Date.parse(document.getElementById("exp_" + @cpt).innerHTML));
+                    console.log("exp_" + @cpt);
+                    console.log("expDate: ");
+                    console.log(expdate);
+                    var now = new Date();
+                    var dt = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                    console.log(dt);
+                    if (expdate < dt) {
+                        console.log("expired");
+                        console.log("#card_" + @cpt);
+                        $("#card_" + @cpt).removeClass('bg-secondary');
+                        $("#card_" + @cpt).addClass('bg-danger');
+                        $("#btn_change_bottle_" + @cpt).removeClass("btn-outline-light");
+                        $("#btn_change_bottle_" + @cpt).addClass("btn-outline-danger");
+                        $("#controlbtn_" + @cpt).removeClass("btn-success");
+                        $("#controlbtn_" + @cpt).addClass("btn-warning");
+                        $("#controlbtn_" + @cpt).text("NOK");
+                        $("#alerttext_" + @cpt).text("EXPIRED need to be replaced soon");
+                    }
+
+                });
+        
+                </script>
+            }
+    }
+    </div>
+
+    
+    
+

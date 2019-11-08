@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-xl-6 col-sm-12">
+                <div class="form-group row" style="margin-top:20px">
+                    <div class="col-12">
+                        <a style="color:#ffbe2e">Choose action</a>
+                        <div id="ProcessSelect">
+                            <select class="form-control col-6" onchange="return GetProcess()" id="ddlProcess">
+                                <option value="0">Select</option>
+                                <option value="5">Chassis Dyno</option>
+                                <option value="1">Engine Test Bench</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="PartialWizard" >
+        </div>
+    </div>
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        function GetProcess() {
+            var process = document.getElementById("ddlProcess").value;
+            console.log("process: ");
+            console.log(process);
+            if (process == 0) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("GetProcess")',
+                dataType: "html",
+                data: { "Process": process },
+                type: "GET",
+                contentType: "application/json",
+                success: function (response) {
+                    $('#PartialWizard').html(response);
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+
+    function NewReport(cpt, bottleNumber) {
+        var lastpressure = document.getElementById("lastpressure_" + cpt).innerHTML;        
+        console.log(lastpressure)
+        if (lastpressure == null) {
+            lastpressure = 999;
+        }
+        var expdate = document.getElementById("exp_" + cpt).innerHTML;
+        console.log(expdate);
+        var reportvalue = document.getElementById("reportvalue_" + cpt).value;
+        //console.log("New pressure: ");
+        //console.log(reportvalue);
+        var process = document.getElementById("ddlProcess").value;
+            //console.log("process: ");
+            //console.log(process);
+        //console.log("Conti bottle number: ");
+        //console.log(bottleNumber);
+        if (reportvalue <= 0 || reportvalue == null) {
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("NewReport")',
+            datatype: 'html',
+            data: { "reportvalue": reportvalue, "continumber": bottleNumber, "lastpressure": lastpressure, "process": process, "expiration_date": expdate},
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                console.log(response);
+                switch ( response.trim() ) {
+                    case "ok":
+                        console.log("case ok");
+                        console.log("#card_" + cpt);
+                        $("#card_" + cpt).removeClass('bg-secondary');
+                        $("#card_" + cpt).addClass('bg-success');
+                        $("#btn_change_bottle_" + cpt).removeClass("btn-outline-warning", "btn-outline-danger");
+                        $("#btn_change_bottle_" + cpt).addClass("btn-outline-light");
+                        $("#controlbtn_" + cpt).removeClass("btn-warning");
+                        $("#controlbtn_" + cpt).addClass("btn-success");
+                        $("#controlbtn_" + cpt).text("OK");
+                        break;
+                    case "nok":
+                        console.log("case nok");
+                        console.log("#card_" + cpt);
+                        $("#card_" + cpt).removeClass('bg-secondary');
+                        $("#card_" + cpt).addClass('bg-danger');
+                        $("#btn_change_bottle_" + cpt).removeClass("btn-outline-light");
+                        $("#btn_change_bottle_" + cpt).addClass("btn-outline-danger");
+                        $("#controlbtn_" + cpt).removeClass("btn-success");
+                        $("#controlbtn_" + cpt).addClass("btn-warning");
+                        $("#controlbtn_" + cpt).text("NOK");
+                        $("#alerttext_" + cpt).text("NOT SAVED => to be replaced");
+                        break;
+                    case "warning":
+                        console.log("case warning");
+                        console.log("#card_" + cpt);
+                        $("#card_" + cpt).removeClass('bg-secondary');
+                        $("#card_" + cpt).addClass('bg-warning');
+                        $("#btn_change_bottle_" + cpt).removeClass("btn-outline-light");
+                        $("#btn_change_bottle_" + cpt).addClass("btn-outline-warning");
+                        $("#controlbtn_" + cpt).removeClass("btn-success");
+                        $("#controlbtn_" + cpt).addClass("btn-warning");
+                        $("#controlbtn_" + cpt).text("Warning")
+                        $("#alerttext_" + cpt).text("SAVED but need to be replaced soon");
+                        break;
+                    case "invalid":
+                        console.log("case invalid");
+                        console.log("#card_" + cpt);
+                        $("#card_" + cpt).removeClass('bg-secondary');
+                        $("#card_" + cpt).addClass('bg-light');
+                        $("#card_" + cpt).removeClass('text-white');
+                        $("#card_" + cpt).removeClass('text-black');
+                        $("#btn_change_bottle_" + cpt).removeClass("btn-outline-warning", "btn-outline-danger");
+                        $("#btn_change_bottle_" + cpt).addClass("btn-outline-light");
+                        $("#controlbtn_" + cpt).removeClass("btn-success");
+                        $("#controlbtn_" + cpt).addClass("btn-warning");
+                        $("#controlbtn_" + cpt).text("Invalid");
+                        $("#alerttext_" + cpt).text("Invalid value");
+                        break;
+                    case "expired":
+                        console.log("expired");
+                        console.log("#card_" + cpt);
+                        $("#card_" + cpt).removeClass('bg-secondary');
+                        $("#card_" + cpt).addClass('bg-danger');
+                        $("#btn_change_bottle_" + cpt).removeClass("btn-outline-light");
+                        $("#btn_change_bottle_" + cpt).addClass("btn-outline-danger");
+                        $("#controlbtn_" + cpt).removeClass("btn-success");
+                        $("#controlbtn_" + cpt).addClass("btn-warning");
+                        $("#controlbtn_" + cpt).text("NOK");
+                        $("#alerttext_" + cpt).text("SAVED but Expired!!!");
+                        break;
+                    default:
+                        console.log("default")
+                        break;
+                }
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+            
+    
+    function searchNewBottle(contiBottleNumber, cpt) {
+        console.log("contiBottleNumber: ");
+        console.log(contiBottleNumber);
+        $.ajax({
+        url: '@Url.Action("searchNewBottle")',
+        dataType: "html",
+        data: { "contiBottleNumber": contiBottleNumber },
+        type: "GET",
+        contentType: "application/json",
+            success: function (response) {
+            console.log("response.trim()");
+                console.log(response.trim());
+                $("#newBottle_" + cpt).text(response.trim());
+        },
+        error: function (err) {
+        alert(err.responseText);
+        }
+    });
+    }
+
+    function saveNewBottle(oldBottleNumber, cpt) {
+        console.log("oldBottleNumber:");
+        console.log(oldBottleNumber);
+        $.ajax({
+        url: '@Url.Action("saveNewBottle")',
+            dataType: "html",
+            cache: false,
+        data: { "oldBottleNumber": oldBottleNumber },
+        type: "GET",
+        contentType: "application/json",
+            success: function (response) {
+                console.log(response);
+                obj = JSON.parse(response);
+                if (obj.message == "Reload") {
+                    $("#card_" + cpt).removeClass('bg-danger');
+                    $("#card_" + cpt).addClass('bg-secondary');
+                    $("#btn_change_bottle_" + cpt).removeClass("btn-outline-danger"); 
+                    $("#btn_change_bottle_" + cpt).addClass("btn-outline-light");
+                    $("#controlbtn_" + cpt).removeClass("btn-success");
+                    $("#controlbtn_" + cpt).addClass("btn-warning");
+                    $("#controlbtn_" + cpt).text("Control");
+                    $("#alerttext_" + cpt).text("Bottle changed need reload to make new report");
+                    window.location = obj.mailText;
+                    $('#Modal_' + cpt).modal('hide');
+                }
+                
+        },
+        error: function (err) {
+        alert(err.responseText);
+        }
+        });
+     }
+        </script>
+    }

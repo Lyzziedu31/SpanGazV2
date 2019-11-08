@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="database_tc2ModelStoreContainer" CdmEntityContainer="database_tc2Entities">
+    <EntitySetMapping Name="tbl_607_actors">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_actors">
+        <MappingFragment StoreEntitySet="tbl_607_actors">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_uid" ColumnName="id_uid" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_bottle">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_bottle">
+        <MappingFragment StoreEntitySet="tbl_607_bottle">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="manufacturer_bottle_number" ColumnName="manufacturer_bottle_number" />
+          <ScalarProperty Name="bottle_conti_number" ColumnName="bottle_conti_number" />
+          <ScalarProperty Name="FK_ID_location" ColumnName="FK_ID_location" />
+          <ScalarProperty Name="FK_ID_shipping_delivery" ColumnName="FK_ID_shipping_delivery" />
+          <ScalarProperty Name="FK_ID_order" ColumnName="FK_ID_order" />
+          <ScalarProperty Name="FK_ID_conformity_certificate" ColumnName="FK_ID_conformity_certificate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_comments">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_comments">
+        <MappingFragment StoreEntitySet="tbl_607_comments">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_UID" ColumnName="ID_UID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_conformity_certificate">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_conformity_certificate">
+        <MappingFragment StoreEntitySet="tbl_607_conformity_certificate">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="fabrication_date" ColumnName="fabrication_date" />
+          <ScalarProperty Name="expiration_date" ColumnName="expiration date" />
+          <ScalarProperty Name="FK_ID_real_gaz_content" ColumnName="FK_ID_real_gaz_content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_gaz">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_gaz">
+        <MappingFragment StoreEntitySet="tbl_607_gaz">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FK_ID_theorical_content" ColumnName="FK_ID_theorical_content" />
+          <ScalarProperty Name="FK_ID_made_tolerance" ColumnName="FK_ID_made_tolerance" />
+          <ScalarProperty Name="FK_ID_gaz_type" ColumnName="FK_ID_gaz_type" />
+          <ScalarProperty Name="FK_ID_testing_tolerance" ColumnName="FK_ID_testing_tolerance" />
+          <ScalarProperty Name="FK_ID_order_details" ColumnName="FK_ID_order_details" />
+          <ScalarProperty Name="FK_ID_unit_made_tolerance" ColumnName="FK_ID_unit_made_tolerance" />
+          <ScalarProperty Name="FK_ID_unit_testing_tolerance" ColumnName="FK_ID_unit_testing_tolerance" />
+          <ScalarProperty Name="FK_ID_unit_theorical_content" ColumnName="FK_ID_unit_theorical_content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_gaz_reporting">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_gaz_reporting">
+        <MappingFragment StoreEntitySet="tbl_607_gaz_reporting">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="reporting_date" ColumnName="reporting date" />
+          <ScalarProperty Name="FK_ID_actors" ColumnName="FK_ID_actors" />
+          <ScalarProperty Name="pressure_value" ColumnName="pressure_value" />
+          <ScalarProperty Name="FK_ID_bottle" ColumnName="FK_ID_bottle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_gaz_type">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_gaz_type">
+        <MappingFragment StoreEntitySet="tbl_607_gaz_type">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="gaz_type" ColumnName="gaz_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_join_bottle_gaz">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_join_bottle_gaz">
+        <MappingFragment StoreEntitySet="tbl_607_join_bottle_gaz">
+          <ScalarProperty Name="FK_ID_gaz" ColumnName="FK_ID_gaz" />
+          <ScalarProperty Name="FK_ID_bottle" ColumnName="FK_ID_bottle" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FK_ID_real_content" ColumnName="FK_ID_real_content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_location">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_location">
+        <MappingFragment StoreEntitySet="tbl_607_location">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="bottle_location" ColumnName="bottle_location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_made_tolerance">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_made_tolerance">
+        <MappingFragment StoreEntitySet="tbl_607_made_tolerance">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="made_tolerance" ColumnName="made_tolerance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_order">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_order">
+        <MappingFragment StoreEntitySet="tbl_607_order">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="order_number" ColumnName="order_number" />
+          <ScalarProperty Name="shipping_request_active" ColumnName="shipping_request_active" />
+          <ScalarProperty Name="item_reception_active" ColumnName="item_reception_active" />
+          <ScalarProperty Name="FK_ID_provider" ColumnName="FK_ID_provider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_order_details">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_order_details">
+        <MappingFragment StoreEntitySet="tbl_607_order_details">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="order_quantity" ColumnName="order_quantity" />
+          <ScalarProperty Name="recieved_quantity" ColumnName="recieved_quantity" />
+          <ScalarProperty Name="poste_number" ColumnName="poste_number" />
+          <ScalarProperty Name="shipping_delays" ColumnName="shipping_delays" />
+          <ScalarProperty Name="gaz_lifetime" ColumnName="gaz_lifetime" />
+          <ScalarProperty Name="FK_ID_packaging" ColumnName="FK_ID_packaging" />
+          <ScalarProperty Name="FK_ID_order" ColumnName="FK_ID_order" />
+          <ScalarProperty Name="stock_mini" ColumnName="stock_mini" />
+          <ScalarProperty Name="content_comments" ColumnName="content_comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_packaging">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_packaging">
+        <MappingFragment StoreEntitySet="tbl_607_packaging">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="packaging" ColumnName="packaging" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_provider">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_provider">
+        <MappingFragment StoreEntitySet="tbl_607_provider">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="provider_name" ColumnName="provider_name" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+          <ScalarProperty Name="cp" ColumnName="cp" />
+          <ScalarProperty Name="town" ColumnName="town" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="fax" ColumnName="fax" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="adress_compl" ColumnName="adress_compl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_real_gaz_content">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_real_gaz_content">
+        <MappingFragment StoreEntitySet="tbl_607_real_gaz_content">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="real_content" ColumnName="real_content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_shipping_delivery">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_shipping_delivery">
+        <MappingFragment StoreEntitySet="tbl_607_shipping_delivery">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BL_ref" ColumnName="BL_ref" />
+          <ScalarProperty Name="reception_date" ColumnName="reception_date" />
+          <ScalarProperty Name="FK_ID_shipping_request" ColumnName="FK_ID_shipping_request" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_shipping_details">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_shipping_details">
+        <MappingFragment StoreEntitySet="tbl_607_shipping_details">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="delivery_quantity" ColumnName="delivery_quantity" />
+          <ScalarProperty Name="FK_ID_shipping_delivery" ColumnName="FK_ID_shipping_delivery" />
+          <ScalarProperty Name="FK_ID_gaz" ColumnName="FK_ID_gaz" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_shipping_request">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_shipping_request">
+        <MappingFragment StoreEntitySet="tbl_607_shipping_request">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="request_date" ColumnName="request_date" />
+          <ScalarProperty Name="FK_order" ColumnName="FK_order" />
+          <ScalarProperty Name="FK_ID_actors" ColumnName="FK_ID_actors" />
+          <ScalarProperty Name="shipping_request_ref" ColumnName="shipping_request_ref" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_shipping_request_details">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_shipping_request_details">
+        <MappingFragment StoreEntitySet="tbl_607_shipping_request_details">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="shipping_quantity" ColumnName="shipping_quantity" />
+          <ScalarProperty Name="FK_shipping_request" ColumnName="FK_shipping_request" />
+          <ScalarProperty Name="FK_ID_order_details" ColumnName="FK_ID_order_details" />
+          <ScalarProperty Name="reception_quantity" ColumnName="reception_quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_testing_tolerance">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_testing_tolerance">
+        <MappingFragment StoreEntitySet="tbl_607_testing_tolerance">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="testing_tolerance" ColumnName="testing_tolerance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_theorical_content">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_theorical_content">
+        <MappingFragment StoreEntitySet="tbl_607_theorical_content">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="theorical_content" ColumnName="theorical_content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_607_units">
+      <EntityTypeMapping TypeName="database_tc2Model.tbl_607_units">
+        <MappingFragment StoreEntitySet="tbl_607_units">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

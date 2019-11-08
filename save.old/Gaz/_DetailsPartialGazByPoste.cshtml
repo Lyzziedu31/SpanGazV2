@@ -1,0 +1,51 @@
+﻿@model SpanGazV2.Models.tbl_607_gaz
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_607_gaz</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_607_gaz_type.gaz_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_607_gaz_type.gaz_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_607_made_tolerance.unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_607_made_tolerance.unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_607_testing_tolerance.unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_607_testing_tolerance.unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_607_theorical_content.theorical_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_607_theorical_content.theorical_content)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

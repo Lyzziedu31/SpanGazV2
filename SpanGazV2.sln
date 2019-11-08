@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28721.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpanGazV2", "SpanGazV2\SpanGazV2.csproj", "{A40390A4-BA9D-4086-878E-81EA649003FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A40390A4-BA9D-4086-878E-81EA649003FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A40390A4-BA9D-4086-878E-81EA649003FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A40390A4-BA9D-4086-878E-81EA649003FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A40390A4-BA9D-4086-878E-81EA649003FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {42E6C07C-6F3F-4902-9297-7767307969D9}
+	EndGlobalSection
+EndGlobal

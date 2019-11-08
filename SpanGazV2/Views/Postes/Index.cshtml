@@ -1,0 +1,121 @@
+﻿@model IEnumerable<SpanGazV2.Models.tbl_607_order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <h2 style="color:#ffbe2e">Postes administration</h2>
+
+<div class="form-group row">
+    <div class="col-md-2">
+        <a style="color:#ffbe2e">Contract number</a>
+        <div id="FK_ID_order_details">
+            @Html.DropDownList("Contracts", null,"Select Contract", htmlAttributes: new { @class = "form-control", @style = "margin-left:15px", @id = "ddlOrder", onchange = "return GetPostes()" })
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div id="PartialPostesGaz" class="col-md-12" style="margin-top:15px">
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+    function GetPostes() {
+        var order = document.getElementById("ddlOrder").value;
+        if (order == 0) {
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("GetPostes")',
+            dataType: "html",
+            data: { "IDContractNumber": order},
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialPostesGaz').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+        }
+
+        function PosteNumberControl() {
+            
+            var posteNumber = document.getElementById("ddlPosteNumber").value;
+            console.log("posteNumber:");
+            console.log(posteNumber);
+
+            $.ajax({
+
+                url: '@Url.Action("PosteNumberControl")',
+                dataType: "html",
+                data: { "posteNumber": posteNumber},
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    if (response.trim() == "OK") {
+                        console.log(response)
+                        $("#messageposte").css('visibility', 'hidden');
+                        $("#messageposte").text("");
+                        $("#buttonCreate").css('visibility', 'visible');
+                    }
+
+                    else {
+                        console.log(response)
+                        $("#messageposte").addClass("alert alert-danger");
+                        $("#messageposte").text(response);
+                        $("#messageposte").css('visibility', 'visible');
+                        $("#buttonCreate").css('visibility', 'hidden');
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+
+        function PosteEditNumberControl() {
+            
+            var posteNumber = document.getElementById("ddlPosteNumber").value;
+            console.log("posteNumber:");
+            console.log(posteNumber);
+
+            $.ajax({
+
+                url: '@Url.Action("PosteEditNumberControl")',
+                dataType: "html",
+                data: { "posteNumber": posteNumber},
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    if (response.trim() == "OK") {
+                        console.log(response)
+                        $("#messageposte").css('visibility', 'hidden');
+                        $("#messageposte").text("");
+                        $("#buttonCreate").css('visibility', 'visible');
+                    }
+
+                    else {
+                        console.log(response)
+                        $("#messageposte").addClass("alert alert-danger");
+                        $("#messageposte").text(response);
+                        $("#messageposte").css('visibility', 'visible');
+                        $("#buttonCreate").css('visibility', 'hidden');
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+    </script>
+}

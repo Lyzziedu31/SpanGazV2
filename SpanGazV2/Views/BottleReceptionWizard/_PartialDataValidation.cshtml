@@ -1,0 +1,157 @@
+﻿<div class="row" style="margin-bottom:20px">
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Contract:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.contractnumber</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Provider:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.provider</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Poste:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.poste</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:20px">
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">BL ref:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.Blref</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Certificate number:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.Certif</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Reception date:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.BLDate</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:20px">
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Fabrication date:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.fabdate</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Expiration date:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.expdate</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Content:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.Content</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:20px; margin-bottom:20px">
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Manufacturer number:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.ManNumber</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-12">
+        <div class="row">
+            <a style="color:#ffbe2e">Continental number:</a>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-sm-12">
+                <a class="form-control">@ViewBag.ContiNumber</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-12">
+    </div>
+</div>
+
+<script>
+    //function SendMail() {
+    //    var olApp = new ActiveXObject("Outlook.Application");
+    //var olItem = olApp.CreateItem(0);
+    //var olOldBody = olItem.HTMLBody;
+    //olOldBody.Importance = 2;
+    //olItem.To = "email@company.com";
+    //olItem.Cc = "";
+    //olItem.Bcc = "";
+    //olItem.Subject = "My subject text";
+    //olItem.HTMLBody = "<span style='font-family: Arial, Helvetica, sans-serif; font-size:11pt; color: #00457C;'>" +
+    //    "<strong>Title1:</strong>Line1<br />" +
+    //    "<strong>Title2:</strong>Line2<br />" +
+    //    "<strong>Title3:</strong>Line3<br /></span>" + olOldBody;
+    //olItem.Display();
+    //}
+
+    function SaveData() {
+        $.ajax({
+                url: '@Url.Action("SaveData")',
+             dataType: "html",
+             data: {},
+                type: "POST",
+                contentType: "application/json",
+            success: function (response) {
+                $("#savebutton").css('visibility', 'hidden');
+                $("#mailbutton").css('visibility', 'visible');
+            },
+             
+             error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+    }
+</script>
+

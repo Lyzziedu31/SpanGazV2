@@ -1,0 +1,38 @@
+﻿@model List<SpanGazV2.Models.tbl_607_shipping_request>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-striped  table-sm">
+            <tr>
+                <th scope="col">
+                    <a style="color:#ffbe2e">Request Date</a>
+                </th>
+                <th scope="col">
+                    <a style="color:#ffbe2e">Ref</a>
+                </th>
+                <th scope="col">
+                    <a style="color:#ffbe2e">Ordered by</a>
+                </th>
+            </tr>
+
+            @foreach (SpanGazV2.Models.tbl_607_shipping_request tbl_607_shipping_request in Model)
+            {
+        <tr>
+                <th scope="col">
+                    @tbl_607_shipping_request.request_date.Month
+                    /
+                    @tbl_607_shipping_request.request_date.Day
+                    /
+                    @tbl_607_shipping_request.request_date.Year
+                </th>
+                <th>
+                    @tbl_607_shipping_request.shipping_request_ref
+                </th>
+                <th scope="col">
+                    @tbl_607_shipping_request.tbl_607_actors.first_name
+                    @tbl_607_shipping_request.tbl_607_actors.last_name
+                </th>
+        </tr>
+            }
+        </table>
+
+    </div>

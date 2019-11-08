@@ -1,0 +1,38 @@
+﻿@model PagedList.IPagedList<SpanGazV2.Models.tbl_607_actors>
+@{
+    ViewBag.Title = "Login Page";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>SpanGaz_V2</title>
+    <!-- Google font -->
+    <link href="@Url.Content("https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600")" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap-grid.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap-reboot.css")" rel="stylesheet" type="text/css" />
+    <!-- Custom stlylesheet -->
+    <link href="@Url.Content("~/Content/login.css")" rel="stylesheet" type="text/css" />
+
+</head>
+<body class="background container-fluid">
+    <div class="row col-lg-12">
+        <div class="offset-lg-8 col-lg-4">
+            <div class="col-md-12 login-size">
+                <div class="row col-md-12">
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        <h1 style="margin-top: 30%" class="font-app-title">SpanGaz_V2</h1>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        <img class="col-md-4" style="width: 100px; height: 100px;" src="~/Content/ressources/icon-login.png" />
+                        <h2 class="col-md-8" style="margin: auto; padding: 25px;">Hello @Context.User.Identity.Name</h2>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-md btn-primary btn-block" onclick="location.href='@Url.Action("Index","Login")'">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

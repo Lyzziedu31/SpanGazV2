@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<SpanGazV2.Models.tbl_607_order>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <h2 style="color:#ffbe2e">Contracts administration</h2>
+
+@using (Html.BeginForm())
+{
+    <p style="color:#ffbe2e">
+        Find: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped table-sm">
+        <tr>
+            <th scope="col">
+                Start Date
+            </th>
+            <th scope="col">
+                End Date
+            </th>
+            <th scope="col">
+                @Html.ActionLink("Contract number", "Index", new { sortOrder = ViewBag.Conti_OrderSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                Order Active
+            </th>
+            <th scope="col">
+                Reception Authorized
+            </th>
+            <th scope="col">
+                @Html.ActionLink("provider", "Index", new { sortOrder = ViewBag.Conti_ProviderSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th scope="col">
+                <button class="btn btn-success btn-outline-dark" onclick="location.href='@Url.Action("Create")'">Create</button>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.start_date)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.end_date)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.order_number)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.shipping_request_active)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.item_reception_active)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_provider.provider_name)
+                </td>
+                <td scope="col">
+                    <button type="button" class="btn btn-light" onclick="location.href='@Url.Action("Edit", new { id = item.ID })'">Edit</button> |
+                    <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Details", new { id = item.ID })'">Details</button> |
+                    <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.ID })'">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+    <p style="color:#ffbe2e">
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </p>

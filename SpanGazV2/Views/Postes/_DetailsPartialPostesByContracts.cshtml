@@ -1,0 +1,84 @@
+﻿@model SpanGazV2.Models.tbl_607_order_details
+
+@{
+    ViewBag.Title = "Details";
+}
+
+    <h2 style="color:#ffbe2e">Poste details</h2>
+
+<div>
+    <hr />
+    <div class="dl-horizontal">
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Poste number</a>
+                <div class="form-control" style="margin-left:15px">
+                    @Html.DisplayFor(model => model.poste_number)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Contract</a>
+                <div class="form-control" style="margin-left:15px">
+                    @Html.DisplayFor(model => model.tbl_607_order.order_number)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Contract Q</a>
+                <div class="form-control" style="margin-left:15px">
+                    @Html.DisplayFor(model => model.order_quantity)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Recieved Q</a>
+                <div class="form-control" style="margin-left:15px">
+                    @Html.DisplayFor(model => model.recieved_quantity)
+                </div>
+            </div>
+            <div class="col-md-3">
+                <a style="color:#ffbe2e">Stock mini</a>
+                <div class="form-control" style="margin-left:15px">
+                    @Html.DisplayFor(model => model.stock_mini)
+                </div>
+            </div>
+        </div>
+
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <a style="color:#ffbe2e">Shipping delays (days)</a>
+                    <div class="form-control" style="margin-left:15px">
+                        @Html.DisplayFor(model => model.shipping_delays)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <a style="color:#ffbe2e">Gaz lifetime (months)</a>
+                    <div class="form-control" style="margin-left:15px">
+                        @Html.DisplayFor(model => model.gaz_lifetime)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <a style="color:#ffbe2e">Packaging</a>
+                    <div class="form-control" style="margin-left:15px">
+                        @Html.DisplayFor(model => model.FK_ID_packaging)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <a style="color:#ffbe2e">Content</a>
+                    <div class="form-control" style="margin-left:15px">
+                        @Html.DisplayFor(model => model.content_comments)
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
+
+<p>
+    <button class="btn btn-danger" style="margin-left:15px" onclick="GetPostes()">Back to list</button>
+</p>

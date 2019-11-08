@@ -1,0 +1,37 @@
+﻿@model SpanGazV2.Models.tbl_607_bottle
+
+@{
+    Layout = null;
+}
+
+
+    <div class="form-group">
+        <a style="color:#ffbe2e">Poste number</a>
+        <div>
+            @Html.DropDownListFor(model=> model.FK_ID_order_details, (IEnumerable<SelectListItem>)ViewBag.FK_ID_order_details, "Select Poste", new { @class = "form-control", @style = "margin-left:15px", @id = "ddlPosteDetails", onchange = "return GetPosteDetails()" })
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    function GetPosteDetails() {
+        var posteDetails = document.getElementById("ddlPosteDetails").value;
+        if (posteDetails == 0) {
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("GetPosteDetails")',
+            dataType: "html",
+            data: { "ID": posteDetails },
+            type: "GET",
+            contentType: "application/json",
+            success: function (response) {
+                $('#PartialPostesDetails').html(response);
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+</script>
+

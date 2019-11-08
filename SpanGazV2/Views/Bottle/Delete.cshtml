@@ -1,0 +1,78 @@
+﻿@model SpanGazV2.Models.tbl_607_bottle
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <h2 class="alert alert-danger">Are you sure you want to delete this?</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <a style="color:#ffbe2e">Manufacturer bottle number</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.manufacturer_bottle_number)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Conti bottle number</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.bottle_conti_number)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Order</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_order.order_number)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Conformity certificate</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_conformity_certificate.ID)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Bottle location</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_location.bottle_location)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Delivery ref</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_shipping_delivery.ID)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Expiration date</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_conformity_certificate.expiration_date)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <button type="button" class="btn btn-success" style="margin-left: 5px">@Html.ActionLink("Back to List", "Index")</button>
+        </div>
+    }
+</div>

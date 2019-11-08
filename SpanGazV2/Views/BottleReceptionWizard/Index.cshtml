@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <div class="container-fluid overflow-auto">
+        <div class="row vertical-align">
+            <div class="col-md-2"></div>
+            <div id="PartialWizard" class="col-md-11 col-xl-11 col-sm-12" style="margin:5%">
+                <div class="form-group row" style="margin-top:20px">
+                    <div class="col-12">
+                        <a style="color:#ffbe2e">Choose action</a>
+                        <div id="ProcessSelect">
+                            <select class="form-control col-6" onchange="return GetProcess()" id="ddlProcess">
+                                <option value="0">Select</option>
+                                <option value="1">Reception</option>
+                                <option value="2">Destocking</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</body>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="BottleSelect"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Enter bottle Conti ref:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <input class="form-control col-5" type="text" style="margin-left:5%; margin-top:1%" placeholder="Enter Conti number" id="bottleNumber">
+                    <div class="alert alert-danger col-5" id="alertMessage" style="margin-left:5%; visibility:hidden" role="alert">
+                        Invalid
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="RemoveBottleInfo()">Valid</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+    function openDoc(sel) {
+        console.log(sel.options[sel.selectedIndex].text);
+        var selectedRef = sel.options[sel.selectedIndex].text;
+        var path1 = ".\\Archives\\Orders\\" ;
+        var path2 = ".docx";
+        var path = path1 + selectedRef + path2;
+        if (selectedRef == 0) {
+            return false;
+        }
+        else {
+            $('#seeBtn').attr('href', path);
+        }
+    }
+
+        function GetProcess() {
+            var process = document.getElementById("ddlProcess").value;
+            console.log(process);
+           switch (process.trim()) {
+                case "0":
+                    return false;
+                    break;
+                case "1":
+                    console.log("case 1")
+                    $.ajax({
+                        url: '@Url.Action("GetProcess")',
+                        dataType: "html",
+                        data: { "Process": process },
+                        type: "GET",
+                        contentType: "application/json",
+                        success: function (response) {
+                            $('#PartialWizard').html(response);
+                        },
+                        error: function (err) {
+                            alert(err.responseText);
+                        }
+                    });
+                    break;
+                case "2":
+                    console.log("case 2")
+                    $('#Modal').modal('show');
+                    break;
+                default:
+                    console.log("default")
+                    return false;
+                    break;
+            }
+        }
+
+        function GetContract(id) {
+            var contract = id;
+            console.log(contract);
+            if (contract == 0) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("GetPoste")',
+                dataType: "html",
+                data: { "Contract": contract },
+                type: "GET",
+                contentType: "application/json",
+                success: function (response) {
+                    $('#PartialWizard').html(response);
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+
+        function RemoveBottleInfo() {
+            var bottleNumber =$("#bottleNumber").val();
+            console.log(bottleNumber);
+            if (bottleNumber == 0) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("RemoveBottleInfo")',
+                dataType: "html",
+                data: { "bottleNumber": bottleNumber },
+                type: "GET",
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response.trim());
+                    if (response.trim() == 'Unknow') {
+                        console.log("Unknow case")
+                        $("#alertMessage").css('visibility', 'visible');
+                    }
+                    else {
+                    console.log(response)
+                    $('#PartialWizard').html(response);
+                    $('#Modal').modal('hide');
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+
+        }
+
+    </script>
+}
+

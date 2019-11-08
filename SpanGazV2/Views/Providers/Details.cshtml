@@ -1,0 +1,81 @@
+﻿@model SpanGazV2.Models.tbl_607_provider
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="color:#ffbe2e">Details</h2>
+
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            <a style="color:#ffbe2e">Name</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.provider_name)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Adress</a>
+        </dt>
+
+        <dd class="form-control col-md-5">
+            @Html.DisplayFor(model => model.adress)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Adress Compl</a>
+        </dt>
+
+        <dd class="form-control col-md-5">
+            @Html.DisplayFor(model => model.adress_compl)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Postal Code</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.cp)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Town</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.town)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Phone</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Fax</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.fax)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">E-Mail</a>
+        </dt>
+
+        <dd class="form-control col-md-5">
+            @Html.DisplayFor(model => model.mail)
+        </dd>
+    </dl>
+</div>
+<p>
+    <button type="button" class="btn btn-warning" style="margin-right: 5px">@Html.ActionLink("Edit", "Edit", new { id = Model.ID })</button> |
+    <button type="button" class="btn btn-danger" style="margin-left: 5px">@Html.ActionLink("Back to List", "Index")</button>
+</p>

@@ -1,0 +1,164 @@
+﻿@model IEnumerable<SpanGazV2.Models.ContractListOrderWizard>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-xl-6 col-sm-12">
+                    <div class="form-group row" style="margin-top:20px">
+                        <div class="col-12">
+                            <a style="color:#ffbe2e">Choose action</a>
+                            <div id="ContractSelect">
+                                <select class="form-control col-6" onchange="return GetContract()" id="ddlContract">
+                                    <option>Select</option>
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value=@item.Contract> Contract: @item.Contract | Provider: @item.Provider | Start Date: @item.Start_Date.ToString("dd-MMM-yyyy") | End Date: @item.End_Date.ToString("dd-MMM-yyyy") </option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="PartialWizard">
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="ErrorModal" tabindex="-1" role="dialog" aria-labelledby="Warning"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="processPopUp">Warning</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5><a style="color:red; font-weight:500" id="ErrorModal_text"></a></h5>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+    function GetContract() {
+        var contract = $("#ddlContract").val();
+        console.log(contract);
+         $.ajax({
+                url: '@Url.Action("GetContract")',
+                dataType: "html",
+                data: { "Contract": contract },
+                type: "GET",
+                contentType: "application/json",
+             success: function (response) {
+                 console.log('response');
+                 console.log(response.trim());
+                 if (response.trim() == "Empty") {
+                     $('#ErrorModal_text').text("Poste empty");
+                     $('#ErrorModal').modal('show');
+                 }
+                 else {
+                     $('#PartialWizard').html(response);
+                 }
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+    }
+
+    function Savepartial(posteid, cpt) {
+        console.log("cpt");
+        console.log(cpt);
+        var quantity = $('#Q_' + cpt).val();
+        if (quantity <= 0) {
+            console.log('if')
+            $('#modalCloseButton').css('visibility','visible')
+            $('#modal_text').text("You can't save a value under or equals to 0");
+            $('#Modal').modal('show');
+        }
+        else {
+            if ($("#btn_" + cpt).hasClass("btn-dark")) {
+                $.ajax({
+                    url: '@Url.Action("Savepartial")',
+                    dataType: "html",
+                    data: { "posteid": posteid, "quantity": quantity },
+                    type: "GET",
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response.trim());
+                        if (response.trim() == "SAVED") {
+                            console.log("if");
+
+                            console.log($("#btn_" + cpt));
+
+                            $("#btn_" + cpt).removeClass("btn-dark");
+                            $("#btn_" + cpt).addClass("btn-success");
+                            $("#Q_" + cpt).attr("disabled", "disabled");
+                        }
+                    },
+                    error: function (err) {
+                        alert(err.responseText);
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: '@Url.Action("Removepartial")',
+                    dataType: "html",
+                    data: { "posteid": posteid},
+                    type: "GET",
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response.trim());
+                        if (response.trim() == "REMOVED") {
+                            $("#btn_" + cpt).removeClass("btn-success");
+                            $("#btn_" + cpt).addClass("btn-dark");
+                            $("#Q_" + cpt).removeAttr("disabled", "disabled");
+                            $("#Q_" + cpt).val('');
+                        }
+                    },
+                    error: function (err) {
+                        alert(err.responseText);
+                    }
+                });
+            }
+        }
+    }
+
+    function SaveAll() {
+        var contract = $("#ddlContract").val();
+        $.ajax({
+                    url: '@Url.Action("SaveAll")',
+                    dataType: "html",
+                    data: { "contract": contract},
+                    type: "GET",
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response.trim());
+                        if (response.trim() !=null) {
+                            $('#modal_text').text("Request generated with success, ref: " + response);
+                            $('#modal_text').css('color', 'green');
+                             $('#modalCloseButton').css('visibility','hidden')
+                            $('#Modal').modal('show');
+                        }
+                    },
+                    error: function (err) {
+                        alert(err.responseText);
+                    }
+                });
+            }
+    </script>
+}

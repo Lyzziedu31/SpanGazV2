@@ -1,0 +1,82 @@
+﻿@model SpanGazV2.Models.tbl_607_gaz
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 class="alert alert-danger">Are you sure you want to delete this?</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            <a style="color:#ffbe2e">Gaz type</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_gaz_type.gaz_type)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Theorical content</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_theorical_content.theorical_content)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">unit</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_units2.unit)
+        </dd>
+
+        <dt>
+            <a style="color:#ffbe2e">Made tolerance</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_made_tolerance.made_tolerance)
+        </dd>
+        <dt>
+            <a style="color:#ffbe2e">Made tolerance unit</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_units.unit)
+        </dd>
+        <dt>
+            <a style="color:#ffbe2e">Testintg tolerance</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_testing_tolerance.testing_tolerance)
+        </dd>
+        <dt>
+            <a style="color:#ffbe2e">Testintg tolerance unit</a>
+        </dt>
+
+        <dd class="form-control col-md-3">
+            @Html.DisplayFor(model => model.tbl_607_units1.unit)
+        </dd>
+    </dl>
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button type="submit" class="btn btn-danger" value="Delete">Delete</button> |
+            </div>
+        }
+        <div>
+            <button class="btn btn-success" style="margin-left:15px" onclick="PosteDetails()">Back to list</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

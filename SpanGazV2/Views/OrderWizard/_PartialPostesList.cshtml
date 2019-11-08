@@ -1,0 +1,220 @@
+﻿@model X.PagedList.IPagedList<SpanGazV2.Models.OrderWizardViewModel>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+
+    <div class="row">
+        <div class="col-1" style="color:#ffbe2e">Find by poste number: </div>
+        <div class="col-2">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @style = "margin-left:15px; ", @id = "ddlFilter" })
+        </div>
+        <div class="col-1">
+            <button type="button" onclick="filter()" class="btn btn-light">Search</button>
+        </div>
+        <div class="col-6" style="margin-top:0.3%">
+            <div class="row">
+                <div class="col-1" style="background-color:goldenrod">
+
+                </div>
+                <div class="col-10">
+                    <a style="color:goldenrod">Mean that ordered Q is upper than contract Q</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a style="visibility:hidden">@ViewBag.contract</a>
+    <div>
+        <div class="table-responsive" style="margin-top:2%">
+            <table class="table table-dark table-striped table-sm">
+                <tr>
+                    <th scope="col" style="width:10%">
+                        Poste N°
+                    </th>
+                    <th scope="col" style="width:10%">
+                        Content
+                    </th>
+                    <th scope="col" style="width:10%">
+                        Contract Q
+                    </th>
+                    <th scope="col" style="width:10%">
+                        Recieved Q
+                    </th>
+                    <th scope="col" style="width:10%">
+                        Q on the road
+                    </th>
+                    <th scope="col" style="width:10%">
+                        Stock min
+                    </th>
+                    <th scope="col" style="width:10%">
+                        Lifetime
+                    </th>
+                    <th scope="col" style="width:10%">
+                        Shipping delay
+                    </th>
+                    <th scope="col" style="width:15%">
+                        Q to order
+                    </th>
+                    <th scope="col" style="width:5%">
+                        <a sstyle="margin-left:20%">Lock</a>
+                    </th>
+                </tr>
+                @{
+                    int cpt = 0;
+                    foreach (var item in ViewBag.OnePageOfPostes)
+                    {
+                                <tr class="ligne_a_controler">
+                                    <td scope="col">
+                                        @item.posteNumber
+                                    </td>
+                                    <td scope="col">
+                                        @item.content
+                                    </td>
+                                    <td scope="col" class="_contractQ" id="contractQ_@cpt">
+                                        @item.contractQ
+                                    </td>
+                                    <td scope="col" class="_recievedQ" id="recievedQ_@cpt">
+                                        @item.recievedQ
+                                    </td>
+                                    <td scope="col" class="_onTheRoadQ" id="onTheRoadQ_@cpt">
+                                        @item.onTheRoadQ
+                                    </td>
+                                    <td scope="col">
+                                        @item.stockMini
+                                    </td>
+                                    <td scope="col">
+                                        @item.lifeTime
+                                    </td>
+                                    <td scope="col">
+                                        @item.shippingDelay
+                                    </td>
+                                    <td scope="col" class="_input">
+                                        <input type="number" class="form-control" id="Q_@cpt" />
+                                    </td>
+                                    <td scope="col">
+                                        <button class="btn btn-dark btn-outline-light" style="margin-left:20%" id="btn_@cpt" onclick="Savepartial( posteid = @item.idPoste, cpt = @cpt)"><i class="fas fa-cart-arrow-down"></i></button>
+                                    </td>
+                                </tr>
+                        cpt++;
+
+                    }
+                }
+                <tr>
+                    <td scope="col" id="contentPager" style="color:#ffbe2e">
+                        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfPostes, page => Url.Action("GetContract", new { page, ViewBag.contract }))
+                    </td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col">
+                        <button class="btn btn-success btn-outline-light" style="margin-top:20%; margin-left:20%" onclick="SaveAll()"><i class="far fa-save"></i></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- Modal-->
+            <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="Warning"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="processPopUp">Warning</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <h5><a style="color:red; font-weight:500" id="modal_text"></a></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-6">
+                                <img src="~/Content/ressources/loading.gif" class="image" id="loadingImg" style="visibility: hidden;height:40px; width:150px; align-content:center" />
+                            </div>
+                            <div class="col-2">
+                                <a href="" target="_blank" id="downloadLink" download style="visibility:hidden; color:green">File</a>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-success" id="generateButton" onclick="GenerateDocument()">Generate</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" id="modalCloseButton" class="btn btn-secondary" data-dismiss="modal" style="visibility:hidden">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <script>
+    $(document).ready(function () {
+        $(document).on("click", "#contentPager a[href]", function () {
+            $.ajax({
+                url: $(this).attr("href"),
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#PartialWizard').html(result);
+                }
+            });
+            return false;
+        });
+
+        controlerLignes();
+
+    });
+
+
+    function controlerLignes() {
+        $(".ligne_a_controler").each( function(){
+
+            var recievedQ = ($(this).find('._recievedQ').text()).trim();
+            console.log("recievedQ");
+            console.log(recievedQ);
+            var onTheRoadQ = ($(this).find('._onTheRoadQ').text()).trim();
+            console.log("onTheRoadQ");
+            console.log(onTheRoadQ);
+            var contractQ = ($(this).find('._contractQ').text()).trim();
+            console.log("contractQ");
+            console.log(contractQ);
+
+            if (eval(recievedQ + onTheRoadQ) >= parseInt(contractQ)) {
+                console.log('if');
+                $(this).find('._recievedQ').css('background-color', 'goldenrod');
+                $(this).find('._onTheRoadQ').css('background-color', 'goldenrod');
+                $(this).find('._contractQ').css('background-color', 'goldenrod');
+            }
+
+        });
+
+        }
+
+    function GenerateDocument() {
+        $("#loadingImg").css("visibility", "visible");
+        $.ajax({
+            url: '@Url.Action("GenerateDocument")',
+            dataType: "html",
+            data: {},
+            type: "POST",
+            contentType: "application/json",
+            success: function (response) {
+                if (response != null) {
+                    console.log(response);
+                    $("#loadingImg").css("visibility", "hidden");
+                    $("#generateButton").css("visibility", "hidden");
+                    $('#modalCloseButton').css('visibility', 'visible');
+                    $('#downloadLink').attr('href', response);
+                    $('#downloadLink').css('visibility', 'visible');
+                }
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    }
+
+    </script>

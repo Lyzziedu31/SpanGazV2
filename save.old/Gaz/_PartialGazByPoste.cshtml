@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SpanGazV2.Models.tbl_607_gaz>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped table-sm">
+        <tr>
+            <th scope="col">
+                Gaz type
+            </th>
+            <th scope="col">
+                Theorical content
+            </th>
+            <th scope="col">
+                Unit
+            </th>
+            <th scope="col">
+                Made tolerance
+            </th>
+            <th scope="col">
+                Unit
+            </th>
+            <th scope="col">
+                Testing tolerance
+            </th>
+            <th scope="col">
+                Unit
+            </th>
+            <th scope="col">
+                <button class="btn btn-success btn-outline-dark" onclick="create()">Create</button>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_gaz_type.gaz_type)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_theorical_content.theorical_content)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_theorical_content.unit)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_made_tolerance.made_tolerance)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_made_tolerance.unit)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_testing_tolerance.testing_tolerance)
+                </td>
+                <td scope="col">
+                    @Html.DisplayFor(modelItem => item.tbl_607_testing_tolerance.unit)
+                </td>
+                <td scope="col">
+                    <button type="button" class="btn btn-light" onclick="edit(@item.ID)"> Edit</button> |
+                    <button type="button" class="btn btn-warning" onclick="details(@item.ID)">Details</button> |
+                    <button type="button" class="btn btn-danger" onclick="deleteitem(@item.ID)">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

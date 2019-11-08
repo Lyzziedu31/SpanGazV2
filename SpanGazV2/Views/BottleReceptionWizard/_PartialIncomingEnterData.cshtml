@@ -1,0 +1,114 @@
+﻿@model SpanGazV2.Models.DeliveryDataValidationModelView
+
+    <div class="row">
+        <a id="contract" style="visibility:hidden">@ViewBag.contract</a>
+        <a id="idposte" style="visibility:hidden">@ViewBag.idposte</a>
+        <a id="poste" style="visibility:hidden">@ViewBag.poste</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-12" style="color:#ffbe2e">Enter BL ref</div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    @Html.EditorFor(model => model.BLRef, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:15px; ", @id = "ddlBLRef", @onchange = "BLControl()", @type="number" } })
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-warning" style="visibility:hidden" id="btn_bl">Control</button>
+                </div>
+                <div class="col-6" id="messagebl" style="margin-top: -5px; margin-left: 20px">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="margin-top:20px">
+            <div class="row">
+                <div class="col-12" style="color:#ffbe2e">Shipping request ref</div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    @Html.DropDownList("shipping_request_ref", ViewBag.shipping_request_ref as SelectList, new { @class = "form-control", @id="idShippingRequest", @style = "margin-left:15px;", @onchange = "openDoc(this)"})
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-light" id="seeBtn" href="">See</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="margin-top:20px">
+            <div class="row">
+                <div class="col-12" style="color:#ffbe2e">Reception date</div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    @Html.EditorFor(model => model.ReceptionDate, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:15px; ", @id = "ddlReceptionDate", @onchange = "BLDateControl()", @type="date" } })
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-danger" style="visibility:hidden" id="btn_date">Control</button>
+                </div>
+                <div class="col-6" id="messagedate" style="margin-top: -5px; margin-left: 20px">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="margin-top:20px">
+            <div class="row">
+                <div class="col-12" style="color:#ffbe2e">Certificate number</div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    @Html.EditorFor(model => model.ConformityCertificate, new { htmlAttributes = new { @class = "form-control", @style = "margin-left:15px; ", @id = "ddlConformityCetificate", @onchange = "CertifControl()", @type="number" } })
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-danger" style="visibility:hidden" onfocus="" id="btn_certif">Control</button>
+                </div>
+                <div class="col-6" id="messagecertif" style="margin-top: -5px; margin-left: 20px">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="margin-top:20px">
+            <div class="row">
+                <div class="col-12" style="color:#ffbe2e">Fabrication date</div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <input type="date" class="form-control" id="Fabdate" style="margin-left:15px" onchange="FabControl()" />
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-danger" style="visibility:hidden" onfocus="" id="btn_fabdate">Control</button>
+                </div>
+                <div class="col-6" id="messagefabdate" style="margin-top: -5px; margin-left: 20px">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="margin-top:20px">
+            <div class="row">
+                <div class="col-12" style="color:#ffbe2e">Expiration date</div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <input type="date" class="form-control" id="Expdate" style="margin-left:15px" onchange="ExpControl()" />
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-danger" style="visibility:hidden" onfocus="" id="btn_expdate">Control</button>
+                </div>
+                <div class="col-6" id="messageexpdate" style="margin-top: -5px; margin-left: 20px">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="nextbutton" style="visibility:hidden; margin-top:20px; margin-left:20px">
+        <button class="btn btn-success" onclick="SelectGazWizard()">Next</button>
+    </div>
+
+
+    
+    
+
+
+
+

@@ -1,0 +1,445 @@
+﻿@model X.PagedList.IPagedList<SpanGazV2.Models.tbl_607_order_details>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+
+
+<div style="margin-top:20px">
+    <div class="row">
+        <div class="col-12" style="color:#ffbe2e">Find by poste number: </div>
+        <div class="row">
+            <div class="col-8">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @style = "margin-left:15px; ", @id = "ddlFilter", @type="number" })
+            </div>
+            <div class="col-4">
+                <button type="button" onclick="filter()" class="btn btn-light">Search</button>
+            </div>
+        </div>
+        <div id="contractvalue">
+            <a style="color:#343a40">@ViewBag.Contract</a>
+        </div>
+    </div>
+    <div clasd="row">
+        <div class="col-md-12">
+            <div class="table-responsive" style="margin-top:20px">
+                <table class="table table-dark table-striped table-sm">
+                    <tr>
+                        <th scope="col">
+                            <a style="color:#ffbe2e">Poste number</a>
+                        </th>
+                        <th scope="col">
+                            <a style="color:#ffbe2e">Content</a>
+                        </th>
+                        <th scope="col">
+                            <a style="color:#ffbe2e">Contract Q</a>
+                        </th>
+                        <th scope="col">
+                            <a style="color:#ffbe2e">Recieved Q</a>
+                        </th>
+                        <th scope="col">
+                            <a style="color:#ffbe2e">Stock min</a>
+                        </th>
+                        <th scope="col">
+                            <a style="color:#ffbe2e">Action</a>
+                        </th>
+                    </tr>
+
+                    @foreach (var tbl_607_order_details in ViewBag.OnePageOfPostes)
+                    {
+                        <tr>
+                            <td scope="col">
+                                @tbl_607_order_details.poste_number
+                            </td>
+                            <td scope="col">
+                                @tbl_607_order_details.content_comments
+                            </td>
+                            <td scope="col">
+                                @tbl_607_order_details.order_quantity
+                            </td>
+                            <td scope="col">
+                                @tbl_607_order_details.recieved_quantity
+                            </td>
+                            <td scope="col">
+                                @tbl_607_order_details.stock_mini
+                            </td>
+                            <td scope="col">
+                                <button type="button" class="btn btn-light" onclick="SelectPosteWizard(id = @tbl_607_order_details.ID, contract = @ViewBag.Contract, poste = @tbl_607_order_details.poste_number)">Select</button>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="contentPager" style="color:#ffbe2e">
+    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfPostes, page => Url.Action("GetPoste", new { page, ViewBag.Contract }))
+</div>
+
+<script>
+        $(document).ready(function () {
+            $(document).on("click", "#contentPager a[href]", function () {
+                $.ajax({
+                    url: $(this).attr("href"),
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#PartialWizard').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+
+        function filter() {
+            var filter = document.getElementById("ddlFilter").value;
+            console.log("filter:");
+            console.log(filter);
+            var contract = @ViewBag.Contract;
+            console.log("contract:");
+            console.log(contract);
+
+            $.ajax({
+
+                url: '@Url.Action("GetPoste")',
+                dataType: "html",
+                data: { "searchString": filter, "Contract": contract },
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    $('#PartialWizard').html(response);
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+        function SelectPosteWizard(id, contract, poste) {
+            console.log("contract:");
+            console.log(contract);
+            console.log("id:")
+            console.log(id)
+            $.ajax({
+
+                url: '@Url.Action("SelectPosteWizard")',
+                dataType: "html",
+                data: { "id": id, "Contract": contract, "poste": poste},
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    $('#PartialWizard').html(response);
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+
+        function BLControl() {
+            var contract = @ViewBag.Contract;
+            console.log("contract:");
+            console.log(contract);
+            var value = document.getElementById("ddlBLRef").value;
+            console.log("BL:");
+            console.log(value);
+
+            $.ajax({
+
+                url: '@Url.Action("BLControl")',
+                dataType: "html",
+                data: { "BLRef": value, "Contract": contract },
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    if (response.trim() == "OK") {
+                        console.log("inside if");
+                        $("#btn_bl").removeClass("btn-danger");
+                        $("#btn_bl").addClass("btn-success");
+                        $("#btn_bl").text("OK");
+                        $("#btn_bl").css('visibility', 'visible');
+
+                        displaybutton();
+                    }
+
+                    else {
+                        $("#btn_bl").css('visibility', 'visible');
+                        $("#btn_bl").text("Warning");
+                        $("#messagebl").addClass("alert alert-warning");
+                        $("#messagebl").text(response);
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+
+        function BLDateControl() {
+            var value = document.getElementById("ddlReceptionDate").value;
+            console.log("date:");
+            console.log(value);
+            if (value == 0) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("BLDateControl")',
+                dataType: "html",
+                data: { "BLDate": value },
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    console.log("btn_date");
+                    console.log(response);
+                    if (response.trim() == "OK") {
+                        console.log("inside if");
+                        $("#btn_date").removeClass("btn-danger");
+                        $("#btn_date").addClass("btn-success");
+                        $("#btn_date").text("OK");
+                        $("#btn_date").css('visibility', 'visible');
+
+                        displaybutton();
+                    }
+                    else {
+                        $("#btn_date").css('visibility', 'visible');
+                        $("#btn_date").text("Incorrect");
+                        $("#messagedate").addClass("alert alert-danger");
+                        $("#messagedate").text(response);
+                    }
+
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+
+        function CertifControl() {
+            var value = document.getElementById("ddlConformityCetificate").value;
+            console.log("cert N:");
+            console.log(value);
+            if (value == 0) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("CertifControl")',
+                dataType: "html",
+                data: { "Certif": value },
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    if (response.trim() == "OK") {
+                        console.log("inside if");
+                        $("#btn_certif").removeClass("btn-danger");
+                        $("#btn_certif").addClass("btn-success");
+                        $("#btn_certif").text("OK");
+                        $("#btn_certif").css('visibility', 'visible');
+                        displaybutton();
+                    }
+                    else {
+                        $("#btn_certif").css('visibility', 'visible');
+                        $("#btn_certif").text("Incorrect");
+                        $("#messagecertif").addClass("alert alert-danger");
+                        $("#messagecertif").text(response);
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+    }
+
+    function FabControl() {
+            var value = document.getElementById("Fabdate").value;
+            console.log("Fabdate:");
+            console.log(value);
+            if (value == 0) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("FabControl")',
+                dataType: "html",
+                data: { "Fabdate": value },
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    if (response.trim() == "OK") {
+                        console.log("inside if");
+                        $("#btn_fabdate").removeClass("btn-danger");
+                        $("#btn_fabdate").addClass("btn-success");
+                        $("#btn_fabdate").text("OK");
+                        $("#btn_fabdate").css('visibility', 'visible');
+                        displaybutton();
+                    }
+                    else {
+                        $("#btn_fabdate").css('visibility', 'visible');
+                        $("#btn_fabdate").text("Incorrect");
+                        $("#messagefabdate").addClass("alert alert-danger");
+                        $("#messagefabdate").text(response);
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+    }
+
+    function ExpControl() {
+            var value = document.getElementById("Expdate").value;
+            console.log("Expdate:");
+            console.log(value);
+            if (value == 0) {
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("ExpControl")',
+                dataType: "html",
+                data: { "Expdate": value },
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    if (response.trim() == "OK") {
+                        console.log("inside if");
+                        $("#btn_expdate").removeClass("btn-danger");
+                        $("#btn_expdate").text("OK");
+                        $("#btn_expdate").addClass("btn-success");
+                        $("#btn_expdate").css('visibility', 'visible');
+
+                        displaybutton();
+                    }
+                    else {
+                        $("#btn_expdate").css('visibility', 'visible');
+                        $("#btn_expdate").text("Incorrect");
+                        $("#messageexpdate").addClass("alert alert-danger");
+                        $("#messageexpdate").text(response);
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+    }
+
+    function displaybutton() {
+        console.log("display next button")
+        if ($("#btn_certif").hasClass("btn-success")
+            && $("#btn_date").hasClass("btn-success")
+            && ($("#btn_bl").hasClass("btn-success") || $("#btn_bl").hasClass("btn-warning"))
+            && $("#btn_fabdate").hasClass("btn-success")
+            && $("#btn_expdate").hasClass("btn-success"))
+        {
+            console.log("set visibility")
+            $("#nextbutton").css('visibility', 'visible');
+        }
+        else
+        {
+
+        }
+    }
+
+        function SelectGazWizard() {
+            //var idposte = document.getElementById("idposte").value;
+            var idposte = $("#idposte").text();
+            console.log("idposte:");
+            console.log(idposte);
+            
+            var idcontract = @ViewBag.Contract;
+            console.log("contract:");
+            console.log(idcontract);
+
+            var idShippingRequest = document.getElementById("idShippingRequest").value;
+            console.log("idShippingRequest: ")
+            console.log(idShippingRequest);
+           
+            var Blref = document.getElementById("ddlBLRef").value;
+            console.log("Blref:");
+            console.log(Blref);
+
+            var BLDate = document.getElementById("ddlReceptionDate").value;
+            console.log("BLDate:");
+            console.log(BLDate);
+
+            var Certif = document.getElementById("ddlConformityCetificate").value;
+            console.log("Certif:");
+            console.log(Certif);
+
+            var fabdate = document.getElementById("Fabdate").value;
+            console.log("fabdate:");
+            console.log(fabdate);
+
+            var expdate = document.getElementById("Expdate").value;
+            console.log("expdate:");
+            console.log(expdate);
+
+            $.ajax({
+
+                url: '@Url.Action("SelectGazWizard")',
+                dataType: "html",
+                data: { "idcontract":idcontract, "idShippingRequest":idShippingRequest, "idposte":idposte, "poste":poste, "Blref":Blref, "BLDate":BLDate, "Certif":Certif, "fabdate":fabdate, "expdate":expdate },
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    $('#PartialWizard').html(response);
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+
+        function ControlGaz(cpt, idgaz) {
+            var certifvalue = $("#certifvalue_" + cpt).val();
+            console.log("certifvalue:");
+            console.log(certifvalue);
+            var normalvalue = $("#normalvalue_" + cpt).text().trim();
+            console.log("normalvalue:");
+            console.log(normalvalue);
+            var tol = $("#tol_" + cpt).text().trim();
+            console.log("tol:");
+            console.log(tol);
+
+            $.ajax({
+                url: '@Url.Action("Controlgaz")',
+                dataType: "html",
+                data: { "certifvalue": certifvalue, "normalvalue": normalvalue, "tol": tol, "idgaz": idgaz },
+                type: "GET",
+                //contentType: "application/json",
+                success: function (response) {
+                    if (response.trim() == "OK") {
+                        console.log("inside if");
+                        $("#controlbtn_" + cpt).removeClass("btn-warning");
+                        $("#controlbtn_" + cpt).removeClass("btn-danger");
+                        $("#controlbtn_" + cpt).addClass("btn-success");
+                        $("#controlbtn_" + cpt).text("OK");
+                        $("#certifvalue_" + cpt).removeClass("alert alert-danger");
+                        displaycontilabel()
+                    }
+                    else {
+                        $("#controlbtn_" + cpt).removeClass("btn-warning");
+                        $("#controlbtn_" + cpt).addClass("btn-danger");
+                        $("#controlbtn_" + cpt).text("Incorrect");
+                        $("#certifvalue_" + cpt).addClass("alert alert-danger");
+                        $("#certifvalue_" + cpt).val(response);
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText);
+                }
+            });
+        }
+
+
+    function displaycontilabel() {
+
+        if ($("#gaztable").find('.btn-warning').length > 0 || $("#gaztable").find('.btn-danger').length > 0) {
+
+            console.log("error");
+        }
+        else {
+            console.log("ok");
+            $("#labeldisplay").css('visibility', 'visible');
+        }
+
+        }
+
+</script>
